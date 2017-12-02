@@ -15,6 +15,7 @@ public class Equipment : ScriptableObject {
 
     public enum Type
     {
+        weapon,
         aggressive,
         defensive,
         utility
@@ -26,8 +27,7 @@ public class Equipment : ScriptableObject {
         damage,
         damageStrength,
         damageAgility,
-        block,
-        move
+        block
     }
 
     public Sprite icon;
@@ -86,5 +86,15 @@ public class EquipmentWrapper
     override public string ToString()
     {
         return equipment.name + " (" + durability + "/" + equipment.durability + ")";
+    }
+
+    public bool NextAction(out Equipment.Ability ac)
+    {
+        ac = equipment.actions[action];
+        cooldown = equipment.actions[action].cooldown+1;
+        action = (action + 1) % equipment.actions.Length;
+        if (ac.action != Equipment.Action.none)
+            durability--;
+        return durability > 0;
     }
 }

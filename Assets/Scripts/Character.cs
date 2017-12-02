@@ -10,7 +10,19 @@ public class Character : ScriptableObject {
     public int constitution = 20;
     public int intelligence = 20;
     [Space]
+    public Equipment baseWeapon;
     public List<Equipment> equipment;
+    [Header("AI")]
+    [Range(0.1f, 1f)]
+    public float aggressive = 0.5f;
+    [Range(0.1f, 1f)]
+    public float defensive = 0.5f;
+    [Range(0.1f, 1f)]
+    public float utility = 0.2f;
+    public int strengthUpgrade = 2;
+    public int agilityUpgrade = 2;
+    public int constitutionUpgrade = 2;
+    public int intelligenceUpgrade = 2;
 }
 
 [System.Serializable]
@@ -35,7 +47,6 @@ public class CharacterWrapper
             equipment.Add(new EquipmentWrapper(character.equipment[i]));
         }
         CalculateStats();
-        health = constitution;
     }
 
     void CalculateStats()
@@ -56,6 +67,7 @@ public class CharacterWrapper
         agility -= inventory.Count;
         constitution -= inventory.Count;
         intelligence -= inventory.Count;
+        health = constitution;
     }
 
     public void AddEquipment(Equipment e)
@@ -118,6 +130,85 @@ public class CharacterWrapper
         {
             equipment[i].NextMatch();
         }
-        health = constitution;
+        CalculateStats();
+    }
+
+    public Equipment.Ability GetAbility()
+    {
+        float sum = character.aggressive + character.defensive + character.utility;
+        float rnd = Random.value*sum;
+        EquipmentWrapper e = null;
+        if (rnd < character.aggressive)
+        {
+            for (int i = 0; i < equipment.Count; i++)
+            {
+                if(equipment[i].equipment.type == Equipment.Type.aggressive || equipment[i].equipment.type == Equipment.Type.weapon)
+                {
+                    e = equipment[i];
+                    int r = Random.Range(0, equipment.Count);
+                    equipment[i] = equipment[r];
+                    equipment[r] = e;
+                    break;
+                }
+            }
+        }
+        else
+        {
+            rnd -= character.aggressive;
+            if (rnd < character.defensive)
+            {
+                for (int i = 0; i < equipment.Count; i++)
+                {
+                    if (equipment[i].equipment.type == Equipment.Type.defensive)
+                    {
+                        e = equipment[i];
+                        int r = Random.Range(0, equipment.Count);
+                        equipment[i] = equipment[r];
+                        equipment[r] = e;
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                for (int i = 0; i < equipment.Count; i++)
+                {
+                    if (equipment[i].equipment.type == Equipment.Type.utility)
+                    {
+                        e = equipment[i];
+                        int r = Random.Range(0, equipment.Count);
+                        equipment[i] = equipment[r];
+                        equipment[r] = e;
+                        break;
+                    }
+                }
+            }
+        }
+        if (e == null)
+        {
+            return GetAbility();
+        }
+        Equipment.Ability action;
+        if (!e.NextAction(out action))
+        {
+            RemoveEquipment(e);
+            if (e.equipment.type == Equipment.Type.weapon)
+            {
+                bool hasWeapon = false;
+                for (int i = 0; i < equipment.Count; i++)
+                {
+                    if (equipment[i].equipment.type == Equipment.Type.weapon)
+                    {
+                        hasWeapon = true;
+                        break;
+                    }
+                }
+                if (!hasWeapon)
+                {
+                    AddEquipment(character.baseWeapon);
+                }
+            }
+        }
+        return action;
     }
 }

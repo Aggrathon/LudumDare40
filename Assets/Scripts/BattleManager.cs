@@ -28,7 +28,29 @@ public class BattleManager : MonoBehaviour {
             PlayerBattle(playerTwo, playerOne);
         else
         {
-            //TODO AI vs AI
+            StartCoroutine(AIvsAI(playerOne, playerTwo));
+        }
+    }
+
+    IEnumerator AIvsAI(CharacterWrapper playerOne, CharacterWrapper playerTwo)
+    {
+        while (true)
+        {
+            Equipment.Ability oneAction = playerOne.GetAbility();
+            Equipment.Ability twoAction = playerTwo.GetAbility();
+            HandleAction(playerOne, playerTwo, ref oneAction, ref twoAction, false);
+            HandleAction(playerTwo, playerOne, ref twoAction, ref oneAction, false);
+            if (playerOne.health < 0 && playerTwo.health >= playerOne.health)
+            {
+                GameState.state.DefeatCharacter(player);
+                yield break;
+            }
+            else if (playerTwo.health < 0 && playerOne.health > playerTwo.health)
+            {
+                GameState.state.DefeatCharacter(playerTwo);
+                yield break;
+            }
+            yield return null;
         }
     }
 
@@ -54,7 +76,7 @@ public class BattleManager : MonoBehaviour {
         playerAgility.text = "" + player.agility;
         playerConstitution.text = "" + player.constitution;
         playerIntelligence.text = "" + player.intelligence;
-        playerCards.SetCards(player.equipment, player.inventory.Count > 0, SetPlayerAction);
+        playerCards.SetCards(player, SetPlayerAction);
     }
 
     void SetPlayerAction(EquipmentWrapper e)
@@ -67,19 +89,66 @@ public class BattleManager : MonoBehaviour {
         }
         else
         {
-            FlashText.Flash("Not implemented yet!", Color.red);
-            //TODO do turn
+            Equipment.Ability playerAction;
+            bool remove = !e.NextAction(out playerAction);
+            Equipment.Ability enemyAction = enemy.GetAbility();
+            FlashText.Flash(enemyAction.name + "\n\n" + playerAction.name, Color.white);
+            HandleAction(player, enemy, ref playerAction, ref enemyAction, true);
+            HandleAction(enemy, player, ref enemyAction, ref playerAction, true);
             if (player.health < 0 && enemy.health >= player.health)
             {
                 FlashText.Flash("You Lost!", Color.red);
+                GameState.state.DefeatCharacter(player);
+                return;
             }
             else if (enemy.health < 0 && player.health > enemy.health)
             {
                 FlashText.Flash("You Won!", Color.green);
+                GameState.state.DefeatCharacter(enemy);
+                return;
+            }
+            if (remove)
+            {
+                FlashText.Flash("Your "+e.equipment.name.ToLower()+" broke!", Color.red);
+                player.RemoveEquipment(e);
             }
             player.NextTurn();
             enemy.NextTurn();
             RefreshStatus();
+        }
+    }
+
+    void HandleAction(CharacterWrapper p1, CharacterWrapper p2, ref Equipment.Ability a1, ref Equipment.Ability a2, bool visual)
+    {
+        switch (a1.action)
+        {
+            case Equipment.Action.none:
+                break;
+            case Equipment.Action.damage:
+                if(a2.action != Equipment.Action.block)
+                {
+                    float damage = p1.strength * a1.amount;
+                    p2.health -= Mathf.RoundToInt(damage);
+                }
+                break;
+            case Equipment.Action.damageStrength:
+                if (a2.action != Equipment.Action.block)
+                {
+                    float damage = p1.strength * a1.amount;
+                    p2.health -= Mathf.RoundToInt(damage);
+                }
+                break;
+            case Equipment.Action.damageAgility:
+                if (a2.action != Equipment.Action.block)
+                {
+                    float damage = p1.strength * a1.amount;
+                    p2.health -= Mathf.RoundToInt(damage);
+                }
+                break;
+            case Equipment.Action.block:
+                break;
+            default:
+                break;
         }
     }
 }

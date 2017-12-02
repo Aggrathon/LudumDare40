@@ -37,4 +37,7 @@ public class GameState : MonoBehaviour {
         GetComponent<BattleManager>().Battle(league[0], league[1]);
     }
 	
+    public void DefeatCharacter(CharacterWrapper c)
+    {
+    }
 }
