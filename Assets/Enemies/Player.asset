@@ -8,21 +8,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ba4951b53beda74094fef926b6149a1, type: 3}
+  m_Script: {fileID: 11500000, guid: f6c165b2e67144745940c67e4b76443c, type: 3}
   m_Name: Player
   m_EditorClassIdentifier: 
-  strength: 8
-  agility: 8
+  strength: 14
+  agility: 14
   constitution: 12
   intelligence: 8
   baseWeapon: {fileID: 0}
   equipment:
-  - {fileID: 11400000, guid: d89132e8a8096404b8bf1d9e080332eb, type: 2}
-  - {fileID: 11400000, guid: 23480b788e45572459a4b1845ff39405, type: 2}
-  aggressive: 0
-  defensive: 0
-  utility: 0
+  - {fileID: 11400000, guid: 5c6c2d5c6ad98d246aa3b1f06aca0a8b, type: 2}
+  - {fileID: 11400000, guid: b3ddddc02ac482e4ba8af028390c93f3, type: 2}
+  aggressive: 0.5
+  defensive: 0.5
+  utility: 0.2
   strengthUpgrade: 0
   agilityUpgrade: 0
   constitutionUpgrade: 0
-  intelligenceUpgrade: 0
+  intelligenceUpgrade: 2

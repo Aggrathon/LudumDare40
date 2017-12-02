@@ -49,7 +49,7 @@ public class BattleManager : MonoBehaviour {
 
     public void OpenBattleUI()
     {
-        GameState.state.tournament.gameObject.SetActive(false);
+        GameState.State.tournament.gameObject.SetActive(false);
         SwapPopup.Close();
         Inventory.Close();
         StartCoroutine(BattleStart());
@@ -68,7 +68,7 @@ public class BattleManager : MonoBehaviour {
     {
         CloseBattleUI();
         yield return new WaitForSeconds(0.1f);
-        GameState.state.DefeatCharacter(looser);
+        GameState.State.DefeatCharacter(looser);
     }
 
     IEnumerator AIvsAI(CharacterWrapper playerOne, CharacterWrapper playerTwo)
@@ -88,12 +88,12 @@ public class BattleManager : MonoBehaviour {
                 playerTwo.RemoveEquipment(twoEquip);
             if (playerOne.health <= 0 && playerTwo.health >= playerOne.health)
             {
-                GameState.state.DefeatCharacter(playerOne);
+                GameState.State.DefeatCharacter(playerOne);
                 yield break;
             }
             else if (playerTwo.health <= 0 && playerOne.health > playerTwo.health)
             {
-                GameState.state.DefeatCharacter(playerTwo);
+                GameState.State.DefeatCharacter(playerTwo);
                 yield break;
             }
             playerOne.NextTurn();

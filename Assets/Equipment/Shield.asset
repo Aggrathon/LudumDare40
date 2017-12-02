@@ -8,17 +8,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f834a2eb0880c642bf60bf1daf0a08c, type: 3}
+  m_Script: {fileID: 11500000, guid: 97d8b50e4eca3cd4197acedff62b4bd4, type: 3}
   m_Name: Shield
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: e6a995b07723ecc4390448af46dd77f1, type: 3}
+  icon: {fileID: 21300000, guid: f7ee05cec26aafe42b71912b4c16b743, type: 3}
   slot: 2
   type: 2
-  actions:
-  - cooldown: 2
-    name: Block
-    action: 4
-    amount: 0
+  actions: []
   durability: 10
   strength: 0
   agility: -2

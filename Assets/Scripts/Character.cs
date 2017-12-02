@@ -160,10 +160,10 @@ public class CharacterWrapper
                     if (b)
                     {
                         AddInventory(e);
-                        GameState.state.GetComponent<BattleManager>().EquipEquipment(equip);
+                        GameState.State.GetComponent<BattleManager>().EquipEquipment(equip);
                     }
                     else
-                        GameState.state.GetComponent<BattleManager>().ThrowEquipment(e);
+                        GameState.State.GetComponent<BattleManager>().ThrowEquipment(e);
                 });
             }
 

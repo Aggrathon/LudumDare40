@@ -8,19 +8,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ba4951b53beda74094fef926b6149a1, type: 3}
+  m_Script: {fileID: 11500000, guid: f6c165b2e67144745940c67e4b76443c, type: 3}
   m_Name: Ulric Ulfsbane
   m_EditorClassIdentifier: 
   strength: 6
   agility: 8
   constitution: 12
-  intelligence: 8
-  baseWeapon: {fileID: 11400000, guid: f4f2070d6dfbee54aa05f976755c42ec, type: 2}
+  intelligence: 6
+  baseWeapon: {fileID: 11400000, guid: 2b88632bdae86c04f8c309a2a6314dba, type: 2}
   equipment:
-  - {fileID: 11400000, guid: 6ecd571566fb80f44be91ce7299555b4, type: 2}
-  - {fileID: 11400000, guid: 6ecd571566fb80f44be91ce7299555b4, type: 2}
+  - {fileID: 11400000, guid: dde79941d8fb2984e9228c02121126a9, type: 2}
+  - {fileID: 11400000, guid: 9045b89c5662daf45aa260ccf57e357a, type: 2}
+  - {fileID: 11400000, guid: dde79941d8fb2984e9228c02121126a9, type: 2}
   aggressive: 1
-  defensive: 0.3
+  defensive: 0.5
   utility: 0.5
   strengthUpgrade: 4
   agilityUpgrade: 4

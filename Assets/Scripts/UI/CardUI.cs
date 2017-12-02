@@ -69,7 +69,7 @@ public class CardUI : MonoBehaviour {
         b.onClick.RemoveAllListeners();
         b.onClick.AddListener(() => {
             FlashText.Flash("You Surrendered!", Color.red);
-            GameState.state.DefeatCharacter(character);
+            GameState.State.DefeatCharacter(character);
         });
         b.interactable = true;
         t.gameObject.SetActive(true);

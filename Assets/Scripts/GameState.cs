@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(BattleManager))]
 public class GameState : MonoBehaviour {
 
-    public static GameState state { get; protected set; }
+    public static GameState State { get; protected set; }
     public static Color playerColor = Color.white;
     
     [System.NonSerialized] public List<CharacterWrapper> league;
@@ -17,7 +17,7 @@ public class GameState : MonoBehaviour {
     int matchIndex;
 
     void Awake () {
-        state = this;
+        State = this;
         league = new List<CharacterWrapper>();
         for (int i = 0; i < startingLeauge.Length; i++)
         {

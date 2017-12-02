@@ -7,9 +7,9 @@ public class SetupPlayer : MonoBehaviour {
     public Equipment[] inventory;
     
 	void Start () {
-        for (int i = 0; i < GameState.state.league.Count; i++)
+        for (int i = 0; i < GameState.State.league.Count; i++)
         {
-            var c = GameState.state.league[i];
+            var c = GameState.State.league[i];
             if (c.character.name == "Player")
             {
                 for (int j = 0; j < inventory.Length; j++)
