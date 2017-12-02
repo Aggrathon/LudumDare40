@@ -68,7 +68,7 @@ public class EquipmentWrapper
         this.equipment = equipment;
         durability = equipment.durability;
         action = 0;
-        cooldown = 0;
+        cooldown = equipment.actions.Length > 0 ? 0 : int.MaxValue;
     }
 
     public void NextMatch()

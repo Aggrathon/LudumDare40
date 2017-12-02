@@ -69,16 +69,18 @@ public class BattleManager : MonoBehaviour {
                 playerOne.RemoveEquipment(oneEquip);
             if (twoEquip != null)
                 playerTwo.RemoveEquipment(twoEquip);
-            if (playerOne.health < 0 && playerTwo.health >= playerOne.health)
+            if (playerOne.health <= 0 && playerTwo.health >= playerOne.health)
             {
                 GameState.state.DefeatCharacter(playerOne);
                 yield break;
             }
-            else if (playerTwo.health < 0 && playerOne.health > playerTwo.health)
+            else if (playerTwo.health <= 0 && playerOne.health > playerTwo.health)
             {
                 GameState.state.DefeatCharacter(playerTwo);
                 yield break;
             }
+            playerOne.NextTurn();
+            playerTwo.NextTurn();
         }
     }
 
@@ -140,13 +142,13 @@ public class BattleManager : MonoBehaviour {
             }
             if (ee != null)
                 enemy.RemoveEquipment(ee);
-            if (player.health < 0 && enemy.health >= player.health)
+            if (player.health <= 0 && enemy.health >= player.health)
             {
                 FlashText.Flash("You Lost!", Color.red);
                 GameState.state.DefeatCharacter(player);
                 return;
             }
-            else if (enemy.health < 0 && player.health > enemy.health)
+            else if (enemy.health <= 0 && player.health > enemy.health)
             {
                 FlashText.Flash("You Won!", Color.green);
                 GameState.state.DefeatCharacter(enemy);
@@ -168,21 +170,21 @@ public class BattleManager : MonoBehaviour {
                 if(a2.action != Equipment.Action.block)
                 {
                     float damage = p1.strength * a1.amount;
-                    p2.health -= Mathf.RoundToInt(damage);
+                    DoDamage(p2, damage);
                 }
                 break;
             case Equipment.Action.damageStrength:
                 if (a2.action != Equipment.Action.block)
                 {
                     float damage = p1.strength * a1.amount;
-                    p2.health -= Mathf.RoundToInt(damage);
+                    DoDamage(p2, damage);
                 }
                 break;
             case Equipment.Action.damageAgility:
                 if (a2.action != Equipment.Action.block)
                 {
                     float damage = p1.strength * a1.amount;
-                    p2.health -= Mathf.RoundToInt(damage);
+                    DoDamage(p2, damage);
                 }
                 break;
             case Equipment.Action.block:
@@ -190,5 +192,28 @@ public class BattleManager : MonoBehaviour {
             default:
                 break;
         }
+    }
+
+    void DoDamage(CharacterWrapper c, float amount)
+    {
+        int rnd = Random.Range(0, c.equipment.Count);
+        for (int i = 0; i < c.equipment.Count; i++)
+        {
+            var e = c.equipment[(rnd + i) % c.equipment.Count];
+            if (e.equipment.type == Equipment.Type.defensive)
+            {
+                int d = Mathf.RoundToInt(amount * 0.5f);
+                c.health -= d;
+                e.durability -= d;
+                if (e.durability <= 0)
+                {
+                    c.RemoveEquipment(e);
+                    if (c == player)
+                        FlashText.Flash("Your " + e.equipment.name.ToLower() + " broke!", Color.red);
+                }
+                return;
+            }
+        }
+        c.health -= Mathf.RoundToInt(amount);
     }
 }

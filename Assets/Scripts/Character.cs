@@ -69,11 +69,11 @@ public class CharacterWrapper
         agility -= inventory.Count;
         constitution -= inventory.Count;
         intelligence -= inventory.Count;
-        health = constitution;
         strength += character.strengthUpgrade*stage;
         agility += character.agilityUpgrade*stage;
         constitution += character.constitutionUpgrade*stage;
         intelligence += character.intelligenceUpgrade*stage;
+        health = constitution;
     }
 
     public void AddEquipment(Equipment e)
@@ -89,6 +89,7 @@ public class CharacterWrapper
         agility += e.equipment.agility;
         constitution += e.equipment.constitution;
         intelligence += e.equipment.intelligence;
+        health = Mathf.Min(health, constitution);
     }
 
     public void RemoveEquipment(EquipmentWrapper e)
@@ -116,6 +117,7 @@ public class CharacterWrapper
                     AddEquipment(character.baseWeapon);
                 }
             }
+            health = Mathf.Min(health, constitution);
         }
     }
 
@@ -126,6 +128,7 @@ public class CharacterWrapper
         agility--;
         constitution--;
         intelligence--;
+        health = Mathf.Min(health, constitution);
     }
 
     public void RemoveInventory(EquipmentWrapper e)
@@ -168,13 +171,20 @@ public class CharacterWrapper
     public EquipmentWrapper GetAbility(out Equipment.Ability ability)
     {
         float sum = character.aggressive + character.defensive + character.utility;
+        if (sum < 0.01f)
+        {
+            ability = new Equipment.Ability();
+            ability.name = "Wait";
+            ability.action = Equipment.Action.none;
+            return null;
+        }
         float rnd = Random.value*sum;
         EquipmentWrapper e = null;
         if (rnd < character.aggressive)
         {
             for (int i = 0; i < equipment.Count; i++)
             {
-                if(equipment[i].equipment.type == Equipment.Type.aggressive || equipment[i].equipment.type == Equipment.Type.weapon)
+                if(equipment[i].equipment.type == Equipment.Type.aggressive || equipment[i].equipment.type == Equipment.Type.weapon && equipment[i].cooldown <= 0)
                 {
                     e = equipment[i];
                     int r = Random.Range(0, equipment.Count);
@@ -182,6 +192,14 @@ public class CharacterWrapper
                     equipment[r] = e;
                     break;
                 }
+            }
+            if (e == null)
+            {
+                float tmp = character.aggressive;
+                character.aggressive = 0f;
+                e = GetAbility(out ability);
+                character.aggressive = tmp;
+                return e;
             }
         }
         else
@@ -191,7 +209,7 @@ public class CharacterWrapper
             {
                 for (int i = 0; i < equipment.Count; i++)
                 {
-                    if (equipment[i].equipment.type == Equipment.Type.defensive)
+                    if (equipment[i].equipment.type == Equipment.Type.defensive && equipment[i].cooldown <= 0)
                     {
                         e = equipment[i];
                         int r = Random.Range(0, equipment.Count);
@@ -199,13 +217,21 @@ public class CharacterWrapper
                         equipment[r] = e;
                         break;
                     }
+                }
+                if (e == null)
+                {
+                    float tmp = character.defensive;
+                    character.defensive = 0f;
+                    e = GetAbility(out ability);
+                    character.defensive = tmp;
+                    return e;
                 }
             }
             else
             {
                 for (int i = 0; i < equipment.Count; i++)
                 {
-                    if (equipment[i].equipment.type == Equipment.Type.utility)
+                    if (equipment[i].equipment.type == Equipment.Type.utility && equipment[i].cooldown <= 0)
                     {
                         e = equipment[i];
                         int r = Random.Range(0, equipment.Count);
@@ -214,11 +240,15 @@ public class CharacterWrapper
                         break;
                     }
                 }
+                if (e == null)
+                {
+                    float tmp = character.utility;
+                    character.utility = 0f;
+                    e = GetAbility(out ability);
+                    character.utility = tmp;
+                    return e;
+                }
             }
-        }
-        if (e == null)
-        {
-            return GetAbility(out ability);
         }
         if (!e.NextAction(out ability))
         {
