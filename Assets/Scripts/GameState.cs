@@ -6,6 +6,7 @@ using UnityEngine;
 public class GameState : MonoBehaviour {
 
     public static GameState state { get; protected set; }
+    public static Color playerColor = Color.white;
     
     [System.NonSerialized] public List<CharacterWrapper> league;
     [SerializeField] Character[] startingLeauge;

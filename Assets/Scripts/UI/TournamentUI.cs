@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class TournamentUI : MonoBehaviour {
@@ -22,6 +23,10 @@ public class TournamentUI : MonoBehaviour {
         for (int i = 0; i < len; i++)
         {
             stages[currentStageNum].GetChild(i + 1).GetChild(0).GetComponent<Text>().text = stage[i].character.name;
+            if(stage[i].character.name == "Player")
+            {
+                stages[currentStageNum].GetChild(i + 1).GetComponent<Image>().color = GameState.playerColor;
+            }
         }
         currentStageNum++;
     }
@@ -36,5 +41,10 @@ public class TournamentUI : MonoBehaviour {
     }
 
     public bool IsTournamentOver { get { return currentStageNum >= stages.Length; } }
+
+    public void Quit()
+    {
+        SceneManager.LoadScene(0);
+    }
 
 }
