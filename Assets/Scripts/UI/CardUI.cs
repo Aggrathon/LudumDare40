@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,9 +11,10 @@ public class CardUI : MonoBehaviour {
 
     public void SetCards(CharacterWrapper character, Action<EquipmentWrapper> onSelect)
     {
+        bool hasAction = false;
         List<EquipmentWrapper> list = character.equipment;
         bool hasInventory = character.inventory.Count > 0;
-        while (transform.childCount < list.Count+1)
+        while (transform.childCount < list.Count+2)
             Instantiate(transform.GetChild(0).gameObject, transform);
         for (int i = 0; i < list.Count; i++)
         {
@@ -24,15 +26,16 @@ public class CardUI : MonoBehaviour {
             b.onClick.RemoveAllListeners();
             b.onClick.AddListener(() => { onSelect(e); });
             b.interactable = e.cooldown <= 0;
+            hasAction = hasAction | e.cooldown <= 0;
             t.gameObject.SetActive(true);
         }
         for (int i = list.Count; i < transform.childCount; i++)
             transform.GetChild(i).gameObject.SetActive(false);
-        if (hasInventory)
+        if (hasInventory || !hasAction)
         {
             Transform t = transform.GetChild(list.Count);
             t.GetChild(0).GetComponent<Image>().sprite = changeIcon;
-            t.GetChild(1).GetComponent<Text>().text = "Swap Equipment";
+            t.GetChild(1).GetComponent<Text>().text = hasInventory? "Swap Equipment" : "Wait";
             Button b = t.GetComponent<Button>();
             b.onClick.RemoveAllListeners();
             b.onClick.AddListener(() => { onSelect(null); });
@@ -41,17 +44,23 @@ public class CardUI : MonoBehaviour {
         }
         if (!hasInventory && list.Count == 0)
         {
-            Transform t = transform.GetChild(0);
-            t.GetChild(0).GetComponent<Image>().sprite = surrenderIcon;
-            t.GetChild(1).GetComponent<Text>().text = "Surrender";
-            Button b = t.GetComponent<Button>();
-            b.onClick.RemoveAllListeners();
-            b.onClick.AddListener(() => {
-                FlashText.Flash("You Surrendered!", Color.red);
-                GameState.state.DefeatCharacter(character);
-            });
-            b.interactable = true;
-            t.gameObject.SetActive(true);
+            StartCoroutine(SurrenderButton(character));
         }
+    }
+
+    IEnumerator SurrenderButton(CharacterWrapper character)
+    {
+        yield return new WaitForSeconds(0.5f);
+        Transform t = transform.GetChild(0);
+        t.GetChild(0).GetComponent<Image>().sprite = surrenderIcon;
+        t.GetChild(1).GetComponent<Text>().text = "Surrender";
+        Button b = t.GetComponent<Button>();
+        b.onClick.RemoveAllListeners();
+        b.onClick.AddListener(() => {
+            FlashText.Flash("You Surrendered!", Color.red);
+            GameState.state.DefeatCharacter(character);
+        });
+        b.interactable = true;
+        t.gameObject.SetActive(true);
     }
 }

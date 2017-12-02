@@ -13,11 +13,11 @@ public class Character : ScriptableObject {
     public Equipment baseWeapon;
     public List<Equipment> equipment;
     [Header("AI")]
-    [Range(0.1f, 1f)]
+    [Range(0f, 1f)]
     public float aggressive = 0.5f;
-    [Range(0.1f, 1f)]
+    [Range(0f, 1f)]
     public float defensive = 0.5f;
-    [Range(0.1f, 1f)]
+    [Range(0f, 1f)]
     public float utility = 0.2f;
     public int strengthUpgrade = 2;
     public int agilityUpgrade = 2;
@@ -36,10 +36,12 @@ public class CharacterWrapper
     public int constitution;
     public int intelligence;
     public int health;
+    public int stage;
 
     public CharacterWrapper(Character character)
     {
         this.character = character;
+        stage = 0;
         equipment = new List<EquipmentWrapper>();
         inventory = new List<EquipmentWrapper>();
         for (int i = 0; i < character.equipment.Count; i++)
@@ -68,6 +70,10 @@ public class CharacterWrapper
         constitution -= inventory.Count;
         intelligence -= inventory.Count;
         health = constitution;
+        strength += character.strengthUpgrade*stage;
+        agility += character.agilityUpgrade*stage;
+        constitution += character.constitutionUpgrade*stage;
+        intelligence += character.intelligenceUpgrade*stage;
     }
 
     public void AddEquipment(Equipment e)
@@ -93,6 +99,23 @@ public class CharacterWrapper
             agility -= e.equipment.agility;
             constitution -= e.equipment.constitution;
             intelligence -= e.equipment.intelligence;
+
+            if (e.equipment.type == Equipment.Type.weapon && character.baseWeapon != null)
+            {
+                bool hasWeapon = false;
+                for (int i = 0; i < equipment.Count; i++)
+                {
+                    if (equipment[i].equipment.type == Equipment.Type.weapon)
+                    {
+                        hasWeapon = true;
+                        break;
+                    }
+                }
+                if (!hasWeapon)
+                {
+                    AddEquipment(character.baseWeapon);
+                }
+            }
         }
     }
 
@@ -133,7 +156,16 @@ public class CharacterWrapper
         CalculateStats();
     }
 
-    public Equipment.Ability GetAbility()
+    public void NextStage()
+    {
+        stage++;
+        strength += character.strengthUpgrade;
+        agility += character.agilityUpgrade;
+        constitution += character.constitutionUpgrade;
+        intelligence += character.intelligenceUpgrade;
+    }
+
+    public EquipmentWrapper GetAbility(out Equipment.Ability ability)
     {
         float sum = character.aggressive + character.defensive + character.utility;
         float rnd = Random.value*sum;
@@ -186,29 +218,12 @@ public class CharacterWrapper
         }
         if (e == null)
         {
-            return GetAbility();
+            return GetAbility(out ability);
         }
-        Equipment.Ability action;
-        if (!e.NextAction(out action))
+        if (!e.NextAction(out ability))
         {
-            RemoveEquipment(e);
-            if (e.equipment.type == Equipment.Type.weapon)
-            {
-                bool hasWeapon = false;
-                for (int i = 0; i < equipment.Count; i++)
-                {
-                    if (equipment[i].equipment.type == Equipment.Type.weapon)
-                    {
-                        hasWeapon = true;
-                        break;
-                    }
-                }
-                if (!hasWeapon)
-                {
-                    AddEquipment(character.baseWeapon);
-                }
-            }
+           return e;
         }
-        return action;
+        return null;
     }
 }

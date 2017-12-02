@@ -28,7 +28,7 @@ public class FlashText : MonoBehaviour {
         {
             instance.messageQueue.Enqueue(message);
             instance.colorQueue.Enqueue(c);
-            if ((float)instance.messageQueue.Count * instance.fadeTime > 5.0f)
+            if ((float)instance.messageQueue.Count * instance.fadeTime > 3.0f)
                 instance.fadeTime *= 0.9f;
         }
         else
@@ -49,6 +49,7 @@ public class FlashText : MonoBehaviour {
             if (messageQueue.Count == 0)
             {
                 gameObject.SetActive(false);
+                fadeTime += 0.05f;
             }
             else
             {

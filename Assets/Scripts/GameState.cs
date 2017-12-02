@@ -62,6 +62,8 @@ public class GameState : MonoBehaviour {
         }
         if(matchIndex >= league.Count)
         {
+            for (int i = 0; i < league.Count; i++)
+                league[i].NextStage();
             tournament.SetStage(league);
             if (tournament.IsTournamentOver)
                 return;

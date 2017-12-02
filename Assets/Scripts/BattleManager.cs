@@ -59,10 +59,16 @@ public class BattleManager : MonoBehaviour {
         while (true)
         {
             yield return null;
-            Equipment.Ability oneAction = playerOne.GetAbility();
-            Equipment.Ability twoAction = playerTwo.GetAbility();
+            Equipment.Ability oneAction;
+            EquipmentWrapper oneEquip = playerOne.GetAbility(out oneAction);
+            Equipment.Ability twoAction;
+            EquipmentWrapper twoEquip = playerTwo.GetAbility(out twoAction);
             HandleAction(playerOne, playerTwo, ref oneAction, ref twoAction, false);
             HandleAction(playerTwo, playerOne, ref twoAction, ref oneAction, false);
+            if (oneEquip != null)
+                playerOne.RemoveEquipment(oneEquip);
+            if (twoEquip != null)
+                playerTwo.RemoveEquipment(twoEquip);
             if (playerOne.health < 0 && playerTwo.health >= playerOne.health)
             {
                 GameState.state.DefeatCharacter(playerOne);
@@ -104,7 +110,7 @@ public class BattleManager : MonoBehaviour {
 
     void SetPlayerAction(EquipmentWrapper e)
     {
-        if (e == null)
+        if (e == null && player.inventory.Count >0)
         {
             //TODO swap equipment
             FlashText.Flash("Not implemented yet!", Color.red);
@@ -113,11 +119,27 @@ public class BattleManager : MonoBehaviour {
         else
         {
             Equipment.Ability playerAction;
-            bool remove = !e.NextAction(out playerAction);
-            Equipment.Ability enemyAction = enemy.GetAbility();
-            FlashText.Flash(enemyAction.name + "\n\n" + playerAction.name, Color.white);
+            bool remove = false;
+            if (e != null)
+                remove = !e.NextAction(out playerAction);
+            else
+            {
+                playerAction = new Equipment.Ability();
+                playerAction.action = Equipment.Action.none;
+                playerAction.name = "Wait";
+            }
+            Equipment.Ability enemyAction;
+            var ee = enemy.GetAbility(out enemyAction);
+            FlashText.Flash(enemyAction.name + "\n\n\n" + playerAction.name, Color.white);
             HandleAction(player, enemy, ref playerAction, ref enemyAction, true);
             HandleAction(enemy, player, ref enemyAction, ref playerAction, true);
+            if (remove)
+            {
+                FlashText.Flash("Your "+e.equipment.name.ToLower()+" broke!", Color.red);
+                player.RemoveEquipment(e);
+            }
+            if (ee != null)
+                enemy.RemoveEquipment(ee);
             if (player.health < 0 && enemy.health >= player.health)
             {
                 FlashText.Flash("You Lost!", Color.red);
@@ -129,11 +151,6 @@ public class BattleManager : MonoBehaviour {
                 FlashText.Flash("You Won!", Color.green);
                 GameState.state.DefeatCharacter(enemy);
                 return;
-            }
-            if (remove)
-            {
-                FlashText.Flash("Your "+e.equipment.name.ToLower()+" broke!", Color.red);
-                player.RemoveEquipment(e);
             }
             player.NextTurn();
             enemy.NextTurn();
