@@ -28,6 +28,8 @@ public class FlashText : MonoBehaviour {
         {
             instance.messageQueue.Enqueue(message);
             instance.colorQueue.Enqueue(c);
+            if ((float)instance.messageQueue.Count * instance.fadeTime > 5.0f)
+                instance.fadeTime *= 0.9f;
         }
         else
         {

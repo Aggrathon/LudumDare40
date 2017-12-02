@@ -11,9 +11,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ba4951b53beda74094fef926b6149a1, type: 3}
   m_Name: Player
   m_EditorClassIdentifier: 
-  strength: 20
+  strength: 2
   agility: 20
   constitution: 20
   intelligence: 20
+  baseWeapon: {fileID: 0}
   equipment:
   - {fileID: 11400000, guid: d89132e8a8096404b8bf1d9e080332eb, type: 2}
+  aggressive: 0
+  defensive: 0
+  utility: 0
+  strengthUpgrade: 2
+  agilityUpgrade: 2
+  constitutionUpgrade: 2
+  intelligenceUpgrade: 2

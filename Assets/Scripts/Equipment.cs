@@ -61,6 +61,10 @@ public class EquipmentWrapper
 
     public EquipmentWrapper(Equipment equipment)
     {
+        if (equipment == null)
+        {
+            Debug.LogError("Equipment Should not be null");
+        }
         this.equipment = equipment;
         durability = equipment.durability;
         action = 0;

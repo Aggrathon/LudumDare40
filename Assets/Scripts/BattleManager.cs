@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class BattleManager : MonoBehaviour {
 
+    public GameObject battleUI;
+    public Button playerFightButton;
     public CardUI playerCards;
     public HealthUI playerHealth;
     public HealthUI enemyHealth;
@@ -17,6 +19,12 @@ public class BattleManager : MonoBehaviour {
     CharacterWrapper player;
     CharacterWrapper enemy;
 
+
+    private void Start()
+    {
+        playerFightButton.onClick.RemoveAllListeners();
+        playerFightButton.onClick.AddListener(OpenBattleUI);
+    }
 
     public void Battle(CharacterWrapper playerOne, CharacterWrapper playerTwo)
     {
@@ -32,17 +40,32 @@ public class BattleManager : MonoBehaviour {
         }
     }
 
+    public void CloseBattleUI()
+    {
+        battleUI.SetActive(false);
+        playerFightButton.interactable = false;
+    }
+
+    public void OpenBattleUI()
+    {
+        RefreshStatus();
+        FlashText.Flash("Fight!", Color.red);
+        battleUI.SetActive(true);
+        GameState.state.tournament.gameObject.SetActive(false);
+    }
+
     IEnumerator AIvsAI(CharacterWrapper playerOne, CharacterWrapper playerTwo)
     {
         while (true)
         {
+            yield return null;
             Equipment.Ability oneAction = playerOne.GetAbility();
             Equipment.Ability twoAction = playerTwo.GetAbility();
             HandleAction(playerOne, playerTwo, ref oneAction, ref twoAction, false);
             HandleAction(playerTwo, playerOne, ref twoAction, ref oneAction, false);
             if (playerOne.health < 0 && playerTwo.health >= playerOne.health)
             {
-                GameState.state.DefeatCharacter(player);
+                GameState.state.DefeatCharacter(playerOne);
                 yield break;
             }
             else if (playerTwo.health < 0 && playerOne.health > playerTwo.health)
@@ -50,7 +73,6 @@ public class BattleManager : MonoBehaviour {
                 GameState.state.DefeatCharacter(playerTwo);
                 yield break;
             }
-            yield return null;
         }
     }
 
@@ -60,6 +82,7 @@ public class BattleManager : MonoBehaviour {
         this.enemy = enemy;
         enemyName.text = enemy.character.name;
         RefreshStatus();
+        playerFightButton.interactable = true;
     }
 
     void RefreshStatus()

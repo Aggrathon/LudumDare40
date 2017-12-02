@@ -7,19 +7,24 @@ public class GameState : MonoBehaviour {
 
     public static GameState state { get; protected set; }
     
-    public List<CharacterWrapper> league;
-    public Character[] startingLeauge;
+    [System.NonSerialized] public List<CharacterWrapper> league;
+    [SerializeField] Character[] startingLeauge;
 
+    public TournamentUI tournament;
+
+    BattleManager bm;
+    int matchIndex;
 
     void Awake () {
         state = this;
-        league.Clear();
+        league = new List<CharacterWrapper>();
         for (int i = 0; i < startingLeauge.Length; i++)
         {
             league.Add(new CharacterWrapper(startingLeauge[i]));
         }
         ShuffleLeage();
-	}
+        bm = GetComponent<BattleManager>();
+    }
 
     void ShuffleLeage()
     {
@@ -34,10 +39,34 @@ public class GameState : MonoBehaviour {
 
     void Start()
     {
-        GetComponent<BattleManager>().Battle(league[0], league[1]);
+        tournament.SetStage(league);
+        bm.battleUI.SetActive(true);
+        bm.CloseBattleUI();
+        bm.Battle(league[0], league[1]);
+        matchIndex = 1;
+        tournament.gameObject.SetActive(true);
     }
 	
     public void DefeatCharacter(CharacterWrapper c)
     {
+        bm.CloseBattleUI();
+        tournament.DefeatCombatant(c);
+        tournament.gameObject.SetActive(true);
+        if (league.Remove(c))
+        {
+            matchIndex++;
+        }
+        else
+        {
+            Debug.LogError("Could not find character to remove from league");
+        }
+        if(matchIndex >= league.Count)
+        {
+            tournament.SetStage(league);
+            if (tournament.IsTournamentOver)
+                return;
+            matchIndex = 1;
+        }
+        bm.Battle(league[matchIndex-1], league[matchIndex]);
     }
 }
