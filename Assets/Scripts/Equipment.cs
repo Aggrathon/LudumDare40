@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName ="Equipment")]
+[CreateAssetMenu(menuName ="SO/Equipment")]
 public class Equipment : ScriptableObject {
 
     public enum Slots
@@ -12,6 +12,13 @@ public class Equipment : ScriptableObject {
         rightHand,
         leftHand,
         bothHands
+    }
+
+    public enum Type
+    {
+        aggressive,
+        defensive,
+        utility
     }
 
     public enum Action
@@ -26,6 +33,7 @@ public class Equipment : ScriptableObject {
 
     public Sprite icon;
     public Slots slot;
+    public Type type;
     public Ability[] actions;
     public int durability = 20;
     [Space]
@@ -41,5 +49,22 @@ public class Equipment : ScriptableObject {
         public string name;
         public Action action;
         public float amount;
+    }
+}
+
+[System.Serializable]
+public class EquipmentWrapper
+{
+    public Equipment equipment;
+    public int durability;
+    public int action;
+    public int cooldown;
+
+    public EquipmentWrapper(Equipment equipment)
+    {
+        this.equipment = equipment;
+        durability = equipment.durability;
+        action = 0;
+        cooldown = 0;
     }
 }

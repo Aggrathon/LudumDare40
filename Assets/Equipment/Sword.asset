@@ -11,10 +11,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f834a2eb0880c642bf60bf1daf0a08c, type: 3}
   m_Name: Sword
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
-  slot: 0
-  actions: []
-  durability: 0
+  icon: {fileID: 21300000, guid: bac7c1ce5f6238a448565bce12ad80d3, type: 3}
+  slot: 2
+  actions:
+  - cooldown: 0
+    name: Prepare
+    action: 0
+    amount: 0
+  - cooldown: 0
+    name: Attack
+    action: 2
+    amount: 1
+  durability: 20
   strength: 0
   agility: 0
   constitution: 0
