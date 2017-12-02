@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class BattleManager : MonoBehaviour {
 
+    public CardUI playerCards;
     public HealthUI playerHealth;
     public HealthUI enemyHealth;
     public Text enemyName;
@@ -53,5 +54,6 @@ public class BattleManager : MonoBehaviour {
         playerAgility.text = "" + player.agility;
         playerConstitution.text = "" + player.constitution;
         playerIntelligence.text = "" + player.intelligence;
+        playerCards.SetCards(player.equipment, player.inventory.Count > 0 || true, (e) => { });
     }
 }

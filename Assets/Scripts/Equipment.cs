@@ -9,8 +9,7 @@ public class Equipment : ScriptableObject {
     {
         head,
         body,
-        rightHand,
-        leftHand,
+        oneHand,
         bothHands
     }
 
@@ -77,5 +76,15 @@ public class EquipmentWrapper
     public void NextTurn()
     {
         cooldown--;
+    }
+
+    public string ActionString()
+    {
+        return equipment.actions[action].name + " (" + durability + "/" + equipment.durability + ")";
+    }
+
+    override public string ToString()
+    {
+        return equipment.name + " (" + durability + "/" + equipment.durability + ")";
     }
 }
