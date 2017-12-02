@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(BattleManager))]
 public class GameState : MonoBehaviour {
 
-    public GameState state { get; protected set; }
+    public static GameState state { get; protected set; }
     
     public List<CharacterWrapper> league;
     public Character[] startingLeauge;

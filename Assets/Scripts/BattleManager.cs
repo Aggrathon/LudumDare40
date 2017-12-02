@@ -54,6 +54,32 @@ public class BattleManager : MonoBehaviour {
         playerAgility.text = "" + player.agility;
         playerConstitution.text = "" + player.constitution;
         playerIntelligence.text = "" + player.intelligence;
-        playerCards.SetCards(player.equipment, player.inventory.Count > 0 || true, (e) => { });
+        playerCards.SetCards(player.equipment, player.inventory.Count > 0, SetPlayerAction);
+    }
+
+    void SetPlayerAction(EquipmentWrapper e)
+    {
+        if (e == null)
+        {
+            //TODO swap equipment
+            FlashText.Flash("Not implemented yet!", Color.red);
+            RefreshStatus();
+        }
+        else
+        {
+            FlashText.Flash("Not implemented yet!", Color.red);
+            //TODO do turn
+            if (player.health < 0 && enemy.health >= player.health)
+            {
+                FlashText.Flash("You Lost!", Color.red);
+            }
+            else if (enemy.health < 0 && player.health > enemy.health)
+            {
+                FlashText.Flash("You Won!", Color.green);
+            }
+            player.NextTurn();
+            enemy.NextTurn();
+            RefreshStatus();
+        }
     }
 }
