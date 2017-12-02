@@ -717,7 +717,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 962166634}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 298.5, z: 0}
+  m_LocalPosition: {x: 0, y: 319, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1550685827}
@@ -1038,6 +1038,7 @@ GameObject:
   - component: {fileID: 1134675899}
   - component: {fileID: 1134675898}
   - component: {fileID: 1134675897}
+  - component: {fileID: 1134675901}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -1052,7 +1053,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1134675895}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 385.5, y: 0, z: 0}
+  m_LocalPosition: {x: 601, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1875411215}
@@ -1135,6 +1136,20 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1134675895}
+--- !u!114 &1134675901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1134675895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1366635177
 GameObject:
   m_ObjectHideFlags: 0
@@ -1331,7 +1346,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1550685822}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e8c052de2ae17a44ab8c82eb0a148fc, type: 3}
+  m_Script: {fileID: 11500000, guid: 592975da5ddc8904c8c193fa4a6836e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   colorButtons:
@@ -1403,7 +1418,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1550685822}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 395.5, y: 318.5, z: 0}
+  m_LocalPosition: {x: 611, y: 339, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1134675896}

@@ -1072,6 +1072,7 @@ GameObject:
   - component: {fileID: 293769360}
   - component: {fileID: 293769363}
   - component: {fileID: 293769362}
+  - component: {fileID: 293769364}
   m_Layer: 5
   m_Name: Enemy Panel
   m_TagString: Untagged
@@ -1167,6 +1168,20 @@ MonoBehaviour:
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 1
   m_ChildControlHeight: 1
+--- !u!114 &293769364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 293769358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &310503656
 GameObject:
   m_ObjectHideFlags: 0
@@ -2464,6 +2479,7 @@ GameObject:
   - component: {fileID: 668285378}
   - component: {fileID: 668285377}
   - component: {fileID: 668285380}
+  - component: {fileID: 668285381}
   m_Layer: 5
   m_Name: Stats Panel
   m_TagString: Untagged
@@ -2562,6 +2578,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 0
   m_VerticalFit: 2
+--- !u!114 &668285381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 668285375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &688383448
 GameObject:
   m_ObjectHideFlags: 0
@@ -2676,7 +2706,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 14e1b1923a15c7745aaa1b8e0b044522, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1d2a7fc2e8bd65941b5836f28bcfeca5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4059,6 +4089,7 @@ GameObject:
   - component: {fileID: 1244685207}
   - component: {fileID: 1244685206}
   - component: {fileID: 1244685205}
+  - component: {fileID: 1244685209}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -4155,6 +4186,20 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1244685203}
+--- !u!114 &1244685209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1244685203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1266340810
 GameObject:
   m_ObjectHideFlags: 0
@@ -6123,6 +6168,7 @@ GameObject:
   - component: {fileID: 1771353689}
   - component: {fileID: 1771353688}
   - component: {fileID: 1771353687}
+  - component: {fileID: 1771353692}
   m_Layer: 5
   m_Name: Inventory
   m_TagString: Untagged
@@ -6233,6 +6279,20 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1771353685}
+--- !u!114 &1771353692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1771353685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1791113118
 GameObject:
   m_ObjectHideFlags: 0
@@ -6287,7 +6347,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 14e1b1923a15c7745aaa1b8e0b044522, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1d2a7fc2e8bd65941b5836f28bcfeca5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6557,6 +6617,7 @@ GameObject:
   - component: {fileID: 1844837311}
   - component: {fileID: 1844837310}
   - component: {fileID: 1844837309}
+  - component: {fileID: 1844837312}
   m_Layer: 5
   m_Name: SwapPopup
   m_TagString: Untagged
@@ -6630,6 +6691,20 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1844837307}
+--- !u!114 &1844837312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1844837307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1846496959
 GameObject:
   m_ObjectHideFlags: 0

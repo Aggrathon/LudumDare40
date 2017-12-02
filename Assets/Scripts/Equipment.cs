@@ -107,7 +107,7 @@ public class EquipmentWrapper
                 slot = ", Body";
                 break;
             case Equipment.Slots.oneHand:
-                slot = ", One hands";
+                slot = ", One hand";
                 break;
             case Equipment.Slots.bothHands:
                 slot = ", Both hands";
