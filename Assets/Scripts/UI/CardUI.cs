@@ -9,7 +9,7 @@ public class CardUI : MonoBehaviour {
     public Sprite changeIcon;
     public Sprite surrenderIcon;
 
-    public void SetCards(CharacterWrapper character, Action<EquipmentWrapper> onSelect)
+    public void SetCards(CharacterWrapper character, Action<EquipmentWrapper, Equipment.Ability> onSelect)
     {
         bool hasAction = false;
         List<EquipmentWrapper> list = character.equipment;
@@ -24,9 +24,9 @@ public class CardUI : MonoBehaviour {
             t.GetChild(1).GetComponent<Text>().text = e.ActionString();
             Button b = t.GetComponent<Button>();
             b.onClick.RemoveAllListeners();
-            b.onClick.AddListener(() => { onSelect(e); });
+            b.onClick.AddListener(() => { onSelect(e, null); });
             b.interactable = e.cooldown <= 0;
-            hasAction = hasAction | e.cooldown <= 0;
+            hasAction = hasAction | b.interactable;
             t.gameObject.SetActive(true);
         }
         for (int i = list.Count; i < transform.childCount; i++)
@@ -35,10 +35,21 @@ public class CardUI : MonoBehaviour {
         {
             Transform t = transform.GetChild(list.Count);
             t.GetChild(0).GetComponent<Image>().sprite = changeIcon;
-            t.GetChild(1).GetComponent<Text>().text = hasInventory? "Swap Equipment" : "Wait";
             Button b = t.GetComponent<Button>();
             b.onClick.RemoveAllListeners();
-            b.onClick.AddListener(() => { onSelect(null); });
+            if (hasInventory)
+            {
+                t.GetChild(1).GetComponent<Text>().text = "Swap Equipment";
+                b.onClick.AddListener(() => { onSelect(null, null); });
+            }
+            else
+            {
+                Equipment.Ability playerAction = new Equipment.Ability();
+                playerAction.action = Equipment.Action.none;
+                playerAction.name = "Wait";
+                t.GetChild(1).GetComponent<Text>().text = "Wait";
+                b.onClick.AddListener(() => { onSelect(null, playerAction); });
+            }
             b.interactable = true;
             t.gameObject.SetActive(true);
         }

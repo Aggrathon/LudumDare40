@@ -51,7 +51,7 @@ public class CharacterWrapper
         CalculateStats();
     }
 
-    void CalculateStats()
+    public void CalculateStats()
     {
         strength = character.strength;
         agility = character.agility;
@@ -90,9 +90,62 @@ public class CharacterWrapper
         constitution += e.equipment.constitution;
         intelligence += e.equipment.intelligence;
         health = Mathf.Min(health, constitution);
+        if (e.equipment.slot == Equipment.Slots.oneHand)
+        {
+            EquipmentWrapper old = null;
+            for (int i = 0; i < equipment.Count - 1; i++)
+            {
+                if (equipment[i].equipment.slot == Equipment.Slots.bothHands)
+                {
+                    RemoveEquipment(equipment[i], e);
+                    break;
+                }
+                else if (equipment[i].equipment.slot == Equipment.Slots.oneHand)
+                {
+                    if (old == null)
+                        old = equipment[i];
+                    else
+                    {
+                        RemoveEquipment(old, e);
+                        break;
+                    }
+                }
+            }
+        }
+        else if (e.equipment.slot == Equipment.Slots.bothHands)
+        {
+            bool second = false;
+            for (int i = 0; i < equipment.Count - 1; i++)
+            {
+                if (equipment[i].equipment.slot == Equipment.Slots.bothHands || equipment[i].equipment.slot == Equipment.Slots.oneHand)
+                {
+                    if (second)
+                    {
+                        RemoveEquipment(equipment[i]);
+                        AddInventory(equipment[i]);
+                    }
+                    else
+                    {
+                        second = true;
+                        RemoveEquipment(equipment[i], e);
+                    }
+                }
+            }
+        }
+        else
+        {
+            for (int i = 0; i < equipment.Count - 1; i++)
+            {
+                if (equipment[i].equipment.slot == e.equipment.slot)
+                {
+                    RemoveEquipment(equipment[i], e);
+                    break;
+                }
+            }
+        }
     }
 
-    public void RemoveEquipment(EquipmentWrapper e)
+    public void RemoveEquipment(EquipmentWrapper e, EquipmentWrapper equip=null)
     {
         if (equipment.Remove(e))
         {
@@ -100,6 +153,19 @@ public class CharacterWrapper
             agility -= e.equipment.agility;
             constitution -= e.equipment.constitution;
             intelligence -= e.equipment.intelligence;
+
+            if (e.durability > 0 && character.name == "Player" && equip != null)
+            {
+                SwapPopup.Popup(e.ToString(), (b) => {
+                    if (b)
+                    {
+                        AddInventory(e);
+                        GameState.state.GetComponent<BattleManager>().EquipEquipment(equip);
+                    }
+                    else
+                        GameState.state.GetComponent<BattleManager>().ThrowEquipment(e);
+                });
+            }
 
             if (e.equipment.type == Equipment.Type.weapon && character.baseWeapon != null)
             {
@@ -129,6 +195,8 @@ public class CharacterWrapper
         constitution--;
         intelligence--;
         health = Mathf.Min(health, constitution);
+        if (character.name == "Player")
+            FlashText.Flash("All Stats: -1", Color.red);
     }
 
     public void RemoveInventory(EquipmentWrapper e)
@@ -139,6 +207,8 @@ public class CharacterWrapper
             agility++;
             constitution++;
             intelligence++;
+            if (character.name == "Player")
+                FlashText.Flash("All Stats: +1", Color.green);
         }
     }
 

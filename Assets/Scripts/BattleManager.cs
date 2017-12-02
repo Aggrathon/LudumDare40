@@ -43,15 +43,32 @@ public class BattleManager : MonoBehaviour {
     public void CloseBattleUI()
     {
         battleUI.SetActive(false);
+        Inventory.Close();
         playerFightButton.interactable = false;
     }
 
     public void OpenBattleUI()
     {
+        GameState.state.tournament.gameObject.SetActive(false);
+        SwapPopup.Close();
+        Inventory.Close();
+        StartCoroutine(BattleStart());
+    }
+
+    IEnumerator BattleStart()
+    {
+        yield return new WaitForSeconds(0.05f);
         RefreshStatus();
         FlashText.Flash("Fight!", Color.red);
+        yield return new WaitForSeconds(0.05f);
         battleUI.SetActive(true);
-        GameState.state.tournament.gameObject.SetActive(false);
+    }
+
+    IEnumerator BattleOver(CharacterWrapper looser)
+    {
+        CloseBattleUI();
+        yield return new WaitForSeconds(0.1f);
+        GameState.state.DefeatCharacter(looser);
     }
 
     IEnumerator AIvsAI(CharacterWrapper playerOne, CharacterWrapper playerTwo)
@@ -89,7 +106,6 @@ public class BattleManager : MonoBehaviour {
         this.player = player;
         this.enemy = enemy;
         enemyName.text = enemy.character.name;
-        RefreshStatus();
         playerFightButton.interactable = true;
     }
 
@@ -110,29 +126,44 @@ public class BattleManager : MonoBehaviour {
         playerCards.SetCards(player, SetPlayerAction);
     }
 
-    void SetPlayerAction(EquipmentWrapper e)
+    public void ThrowEquipment(EquipmentWrapper ew)
     {
-        if (e == null && player.inventory.Count >0)
+        if (!battleUI.activeSelf)
+            return;
+        Equipment.Ability ac = new Equipment.Ability();
+        ac.action = Equipment.Action.damage;
+        ac.amount = ew.equipment.type == Equipment.Type.weapon ? 6 : 4;
+        ac.name = "Throw " + ew.equipment.name;
+        SetPlayerAction(ew, ac);
+    }
+
+    public void EquipEquipment(EquipmentWrapper e)
+    {
+        if (!battleUI.activeSelf)
+            return;
+        Equipment.Ability ac = new Equipment.Ability();
+        ac.action = Equipment.Action.none;
+        ac.name = "Equip " + e.equipment.name;
+        SetPlayerAction(e, ac);
+    }
+
+    void SetPlayerAction(EquipmentWrapper e, Equipment.Ability action)
+    {
+        if (e == null && action == null)
         {
-            //TODO swap equipment
-            FlashText.Flash("Not implemented yet!", Color.red);
-            RefreshStatus();
+            Inventory.Show(player);
         }
         else
         {
             Equipment.Ability playerAction;
             bool remove = false;
-            if (e != null)
-                remove = !e.NextAction(out playerAction);
+            if (action != null)
+                playerAction = action;
             else
-            {
-                playerAction = new Equipment.Ability();
-                playerAction.action = Equipment.Action.none;
-                playerAction.name = "Wait";
-            }
+                remove = !e.NextAction(out playerAction);
             Equipment.Ability enemyAction;
             var ee = enemy.GetAbility(out enemyAction);
-            FlashText.Flash(enemyAction.name + "\n\n\n" + playerAction.name, Color.white);
+            FlashText.Flash(enemyAction.name + "\n\n\n\n" + playerAction.name, Color.white);
             HandleAction(player, enemy, ref playerAction, ref enemyAction, true);
             HandleAction(enemy, player, ref enemyAction, ref playerAction, true);
             if (remove)
@@ -145,13 +176,13 @@ public class BattleManager : MonoBehaviour {
             if (player.health <= 0 && enemy.health >= player.health)
             {
                 FlashText.Flash("You Lost!", Color.red);
-                GameState.state.DefeatCharacter(player);
+                StartCoroutine(BattleOver(player));
                 return;
             }
             else if (enemy.health <= 0 && player.health > enemy.health)
             {
                 FlashText.Flash("You Won!", Color.green);
-                GameState.state.DefeatCharacter(enemy);
+                StartCoroutine(BattleOver(enemy));
                 return;
             }
             player.NextTurn();
@@ -169,8 +200,7 @@ public class BattleManager : MonoBehaviour {
             case Equipment.Action.damage:
                 if(a2.action != Equipment.Action.block)
                 {
-                    float damage = p1.strength * a1.amount;
-                    DoDamage(p2, damage);
+                    DoDamage(p2, a1.amount);
                 }
                 break;
             case Equipment.Action.damageStrength:
@@ -183,7 +213,7 @@ public class BattleManager : MonoBehaviour {
             case Equipment.Action.damageAgility:
                 if (a2.action != Equipment.Action.block)
                 {
-                    float damage = p1.strength * a1.amount;
+                    float damage = p1.agility * a1.amount;
                     DoDamage(p2, damage);
                 }
                 break;

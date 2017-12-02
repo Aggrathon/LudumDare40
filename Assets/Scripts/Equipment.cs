@@ -42,7 +42,7 @@ public class Equipment : ScriptableObject {
     public int intelligence;
 
     [System.Serializable]
-    public struct Ability
+    public class Ability
     {
         public int cooldown;
         public string name;
@@ -74,7 +74,7 @@ public class EquipmentWrapper
     public void NextMatch()
     {
         action = 0;
-        cooldown = 0;
+        cooldown = equipment.actions.Length > 0 ? 0 : int.MaxValue;
     }
 
     public void NextTurn()
@@ -84,12 +84,39 @@ public class EquipmentWrapper
 
     public string ActionString()
     {
+        if (equipment.actions.Length == 0 || cooldown > 0)
+            return equipment.name + " (" + durability + "/" + equipment.durability + ")";
         return equipment.actions[action].name + " (" + durability + "/" + equipment.durability + ")";
     }
 
     override public string ToString()
     {
         return equipment.name + " (" + durability + "/" + equipment.durability + ")";
+    }
+
+
+    public string ToStringLong()
+    {
+        string slot;
+        switch (equipment.slot)
+        {
+            case Equipment.Slots.head:
+                slot = ", Head";
+                break;
+            case Equipment.Slots.body:
+                slot = ", Body";
+                break;
+            case Equipment.Slots.oneHand:
+                slot = ", One hands";
+                break;
+            case Equipment.Slots.bothHands:
+                slot = ", Both hands";
+                break;
+            default:
+                slot = "";
+                break;
+        }
+        return equipment.name + " (" + durability + "/" + equipment.durability + slot +")";
     }
 
     public bool NextAction(out Equipment.Ability ac)

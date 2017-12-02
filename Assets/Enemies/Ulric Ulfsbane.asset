@@ -15,9 +15,10 @@ MonoBehaviour:
   agility: 8
   constitution: 12
   intelligence: 8
-  baseWeapon: {fileID: 11400000, guid: d89132e8a8096404b8bf1d9e080332eb, type: 2}
+  baseWeapon: {fileID: 11400000, guid: f4f2070d6dfbee54aa05f976755c42ec, type: 2}
   equipment:
-  - {fileID: 11400000, guid: d89132e8a8096404b8bf1d9e080332eb, type: 2}
+  - {fileID: 11400000, guid: 6ecd571566fb80f44be91ce7299555b4, type: 2}
+  - {fileID: 11400000, guid: 6ecd571566fb80f44be91ce7299555b4, type: 2}
   aggressive: 1
   defensive: 0.3
   utility: 0.5
