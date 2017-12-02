@@ -15,4 +15,5 @@ MonoBehaviour:
   agility: 20
   constitution: 20
   intelligence: 20
-  equipment: []
+  equipment:
+  - {fileID: 11400000, guid: d89132e8a8096404b8bf1d9e080332eb, type: 2}

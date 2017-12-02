@@ -67,4 +67,15 @@ public class EquipmentWrapper
         action = 0;
         cooldown = 0;
     }
+
+    public void NextMatch()
+    {
+        action = 0;
+        cooldown = 0;
+    }
+
+    public void NextTurn()
+    {
+        cooldown--;
+    }
 }
