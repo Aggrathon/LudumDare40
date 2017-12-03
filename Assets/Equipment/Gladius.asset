@@ -9,26 +9,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 97d8b50e4eca3cd4197acedff62b4bd4, type: 3}
-  m_Name: Sword
+  m_Name: Gladius
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 9de525b59081f534db64b4a21bf3f67d, type: 3}
+  icon: {fileID: 21300000, guid: 69ef6abbf3b543a41aa9930586d06036, type: 3}
   slot: 2
   type: 0
   actions:
-  - cooldown: 0
-    name: Prepare
-    action: 0
-    amount: 0
-  - cooldown: 0
-    name: Slash
-    action: 2
-    amount: 1
-  - cooldown: 0
-    name: Prepare
-    action: 0
-    amount: 1
-  - cooldown: 0
-    name: Stab
+  - cooldown: 1
+    name: Attack
     action: 2
     amount: 1
   durability: 8

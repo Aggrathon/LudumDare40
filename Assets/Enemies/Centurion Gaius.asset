@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6c165b2e67144745940c67e4b76443c, type: 3}
+  m_Name: Centurion Gaius
+  m_EditorClassIdentifier: 
+  strength: 10
+  agility: 6
+  constitution: 16
+  intelligence: 10
+  baseWeapon: {fileID: 11400000, guid: 5c6c2d5c6ad98d246aa3b1f06aca0a8b, type: 2}
+  equipment:
+  - {fileID: 11400000, guid: 9045b89c5662daf45aa260ccf57e357a, type: 2}
+  - {fileID: 11400000, guid: 40d3fe37e1394bb40a26abe84c52a23e, type: 2}
+  - {fileID: 11400000, guid: b3ddddc02ac482e4ba8af028390c93f3, type: 2}
+  aggressive: 0.2
+  defensive: 0.5
+  utility: 0.2
+  strengthUpgrade: 2
+  agilityUpgrade: 2
+  constitutionUpgrade: 2
+  intelligenceUpgrade: 2
+  upgrades:
+  - {fileID: 11400000, guid: 9045b89c5662daf45aa260ccf57e357a, type: 2}
+  - {fileID: 11400000, guid: 7364685925e434f45a936326661931f0, type: 2}
+  - {fileID: 11400000, guid: 40d3fe37e1394bb40a26abe84c52a23e, type: 2}
+  - {fileID: 11400000, guid: 8d3996f68ca908945b2a22f6ada5d394, type: 2}
+  - {fileID: 11400000, guid: 7364685925e434f45a936326661931f0, type: 2}
+  - {fileID: 11400000, guid: 40d3fe37e1394bb40a26abe84c52a23e, type: 2}

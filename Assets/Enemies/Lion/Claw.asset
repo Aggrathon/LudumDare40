@@ -9,30 +9,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 97d8b50e4eca3cd4197acedff62b4bd4, type: 3}
-  m_Name: Sword
+  m_Name: Claw
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 9de525b59081f534db64b4a21bf3f67d, type: 3}
+  icon: {fileID: 0}
   slot: 2
   type: 0
   actions:
   - cooldown: 0
-    name: Prepare
-    action: 0
-    amount: 0
+    name: Claw
+    action: 1
+    amount: 4
   - cooldown: 0
-    name: Slash
-    action: 2
-    amount: 1
-  - cooldown: 0
-    name: Prepare
-    action: 0
-    amount: 1
-  - cooldown: 0
-    name: Stab
-    action: 2
-    amount: 1
-  durability: 8
+    name: Maim
+    action: 1
+    amount: 4
+  durability: 2
   strength: 0
-  agility: 2
+  agility: 0
   constitution: 0
-  intelligence: 2
+  intelligence: 0

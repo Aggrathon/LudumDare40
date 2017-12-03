@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6c165b2e67144745940c67e4b76443c, type: 3}
+  m_Name: Lion
+  m_EditorClassIdentifier: 
+  strength: 8
+  agility: 8
+  constitution: 20
+  intelligence: 2
+  baseWeapon: {fileID: 11400000, guid: bdfe2faa40e1b544e80f8050122045a8, type: 2}
+  equipment:
+  - {fileID: 11400000, guid: bdfe2faa40e1b544e80f8050122045a8, type: 2}
+  - {fileID: 11400000, guid: 26f304a04af33294e830d57550714187, type: 2}
+  - {fileID: 11400000, guid: 39ed7462a041f824ebb2eeea01f4bbcd, type: 2}
+  - {fileID: 11400000, guid: eefbd2fb906c0cb4aa61ab22507c32f2, type: 2}
+  aggressive: 0.5
+  defensive: 0.5
+  utility: 1
+  strengthUpgrade: 2
+  agilityUpgrade: 2
+  constitutionUpgrade: 2
+  intelligenceUpgrade: 2
+  upgrades:
+  - {fileID: 11400000, guid: 39ed7462a041f824ebb2eeea01f4bbcd, type: 2}
+  - {fileID: 11400000, guid: 26f304a04af33294e830d57550714187, type: 2}
+  - {fileID: 11400000, guid: bdfe2faa40e1b544e80f8050122045a8, type: 2}
+  - {fileID: 11400000, guid: eefbd2fb906c0cb4aa61ab22507c32f2, type: 2}
+  - {fileID: 11400000, guid: bdfe2faa40e1b544e80f8050122045a8, type: 2}
+  - {fileID: 11400000, guid: 26f304a04af33294e830d57550714187, type: 2}
+  - {fileID: 11400000, guid: 39ed7462a041f824ebb2eeea01f4bbcd, type: 2}
+  - {fileID: 11400000, guid: eefbd2fb906c0cb4aa61ab22507c32f2, type: 2}
