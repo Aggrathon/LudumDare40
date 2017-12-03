@@ -15,7 +15,7 @@ public class GameState : MonoBehaviour {
 
     public TournamentUI tournament;
 
-    BattleManager bm;
+	[System.NonSerialized] public BattleManager battleManager;
     int matchIndex;
 
     void Awake () {
@@ -28,7 +28,7 @@ public class GameState : MonoBehaviour {
 				player = league[league.Count - 1];
         }
         ShuffleLeage();
-        bm = GetComponent<BattleManager>();
+        battleManager = GetComponent<BattleManager>();
     }
 
     void ShuffleLeage()
@@ -45,18 +45,17 @@ public class GameState : MonoBehaviour {
     void Start()
     {
         tournament.SetStage(league);
-        bm.battleUI.SetActive(true);
-        bm.CloseBattleUI();
-        bm.Battle(league[0], league[1]);
+        battleManager.battleUI.SetActive(true);
+        battleManager.CloseBattleUI();
+        battleManager.Battle(league[0], league[1]);
         matchIndex = 1;
         tournament.gameObject.SetActive(true);
     }
 	
     public void DefeatCharacter(CharacterWrapper c)
     {
-        bm.CloseBattleUI();
+        battleManager.CloseBattleUI();
         tournament.DefeatCombatant(c);
-        tournament.gameObject.SetActive(true);
         if (league.Remove(c))
         {
             matchIndex++;
@@ -74,6 +73,6 @@ public class GameState : MonoBehaviour {
                 return;
             matchIndex = 1;
         }
-        bm.Battle(league[matchIndex-1], league[matchIndex]);
+        battleManager.Battle(league[matchIndex-1], league[matchIndex]);
     }
 }

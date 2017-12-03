@@ -19,6 +19,7 @@ public class BattleManager : MonoBehaviour {
     CharacterWrapper player;
     CharacterWrapper enemy;
 
+	int reward = 0;
 
     private void Start()
     {
@@ -58,18 +59,32 @@ public class BattleManager : MonoBehaviour {
 
     IEnumerator BattleStart()
     {
-        yield return new WaitForSeconds(0.05f);
+        yield return new WaitForSeconds(0.1f);
         RefreshStatus();
         FlashText.Flash("Fight!", Color.red);
-        yield return new WaitForSeconds(0.05f);
+        yield return new WaitForSeconds(0.1f);
         battleUI.SetActive(true);
-    }
+		GameState.State.tournament.gameObject.SetActive(false);
+		SwapPopup.Close();
+		Inventory.Close();
+		Shop.Close();
+	}
 
     IEnumerator BattleOver(CharacterWrapper looser)
-    {
-        CloseBattleUI();
-        yield return new WaitForSeconds(0.1f);
-        GameState.State.DefeatCharacter(looser);
+	{
+		int mr = GameState.State.tournament.currentStageNum * GameState.State.tournament.currentStageNum * 100;
+		yield return new WaitForSeconds(0.1f);
+		CloseBattleUI();
+		GameState.State.DefeatCharacter(looser);
+		yield return new WaitForSeconds(0.1f);
+		if (looser == player)
+		{
+			LostPopup.Show();
+		}
+		else
+		{
+			RewardPopup.Show(looser, reward, mr);
+		}
     }
 
     IEnumerator AIvsAI(CharacterWrapper playerOne, CharacterWrapper playerTwo)
@@ -108,6 +123,7 @@ public class BattleManager : MonoBehaviour {
         this.enemy = enemy;
         enemyName.text = enemy.character.name;
         playerFightButton.interactable = true;
+		reward = 0;
     }
 
     void RefreshStatus()
@@ -136,6 +152,7 @@ public class BattleManager : MonoBehaviour {
         ac.amount = ew.equipment.type == Equipment.Type.weapon ? 6 : 4;
         ac.name = "Throw " + ew.equipment.name;
         SetPlayerAction(ew, ac);
+		reward += 10;
     }
 
     public void EquipEquipment(EquipmentWrapper e)
@@ -176,19 +193,18 @@ public class BattleManager : MonoBehaviour {
                 enemy.RemoveEquipment(ee);
             if (player.health <= 0 && enemy.health >= player.health)
             {
-                FlashText.Flash("You Lost!", Color.red);
                 StartCoroutine(BattleOver(player));
                 return;
             }
             else if (enemy.health <= 0 && player.health > enemy.health)
             {
-                FlashText.Flash("You Won!", Color.green);
                 StartCoroutine(BattleOver(enemy));
                 return;
             }
             player.NextTurn();
             enemy.NextTurn();
             RefreshStatus();
+			reward++;
         }
     }
 
@@ -202,24 +218,42 @@ public class BattleManager : MonoBehaviour {
                 if(a2.action != Equipment.Action.block)
                 {
                     DoDamage(p2, a1.amount);
-                }
-                break;
+				}
+				else if (p2 == player)
+				{
+					reward += 10;
+				}
+				break;
             case Equipment.Action.damageStrength:
                 if (a2.action != Equipment.Action.block)
                 {
                     float damage = p1.strength * a1.amount;
                     DoDamage(p2, damage);
-                }
-                break;
+				}
+				else if (p2 == player)
+				{
+					reward += 10;
+				}
+				break;
             case Equipment.Action.damageAgility:
                 if (a2.action != Equipment.Action.block)
                 {
                     float damage = p1.agility * a1.amount;
                     DoDamage(p2, damage);
                 }
+				else if (p2 == player)
+				{
+					reward += 10;
+				}
                 break;
             case Equipment.Action.block:
                 break;
+			case Equipment.Action.cheer:
+				if (p1 == player)
+				{
+					reward += 20;
+				}
+				break;
             default:
                 break;
         }

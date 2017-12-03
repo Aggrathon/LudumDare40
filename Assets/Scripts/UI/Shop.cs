@@ -7,6 +7,8 @@ public class Shop : MonoBehaviour {
 
 	protected static Shop instance;
 
+	public Text money;
+
 	private void Awake()
 	{
 		instance = this;
@@ -15,6 +17,7 @@ public class Shop : MonoBehaviour {
 
 	void Refresh()
 	{
+		money.text = "You have " + GameState.State.money + " Denarius";
 		transform.GetChild(3).GetComponent<Button>().interactable = GameState.State.money >= 100;
 		transform.GetChild(4).GetComponent<Button>().interactable = GameState.State.money >= 200;
 		transform.GetChild(5).GetComponent<Button>().interactable = GameState.State.money >= 250;

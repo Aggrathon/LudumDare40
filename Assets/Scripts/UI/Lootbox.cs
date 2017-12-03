@@ -39,7 +39,11 @@ public class Lootbox : MonoBehaviour {
 				if (num > 0)
 					Refresh();
 				else
+				{
 					gameObject.SetActive(false);
+					if (!GameState.State.battleManager.battleUI.activeSelf)
+						GameState.State.tournament.gameObject.SetActive(true);
+				}
 			});
 			t.gameObject.SetActive(true);
 		}
@@ -108,9 +112,5 @@ public class Lootbox : MonoBehaviour {
 		}
 		instance.Refresh();
 	}
-
-	public static void Close()
-	{
-		instance.gameObject.SetActive(false);
-	}
+	
 }

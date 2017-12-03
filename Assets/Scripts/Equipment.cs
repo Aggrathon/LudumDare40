@@ -27,7 +27,8 @@ public class Equipment : ScriptableObject {
         damage,
         damageStrength,
         damageAgility,
-        block
+        block,
+		cheer
     }
 
     public Sprite icon;
