@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: Player
   m_EditorClassIdentifier: 
   look: {fileID: 21300000, guid: 723014a073a969c41adff0c3181e881e, type: 3}
-  strength: 14
+  strength: 12
   agility: 14
   constitution: 16
   intelligence: 8

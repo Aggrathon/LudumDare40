@@ -94,7 +94,6 @@ public class CharacterWrapper
         agility += e.equipment.agility;
         constitution += e.equipment.constitution;
         intelligence += e.equipment.intelligence;
-		bool hasRemoved = false;
         if (e.equipment.slot == Equipment.Slots.oneHand)
         {
             EquipmentWrapper old = null;
@@ -102,8 +101,7 @@ public class CharacterWrapper
             {
                 if (equipment[i].equipment.slot == Equipment.Slots.bothHands)
                 {
-                    RemoveEquipment(equipment[i], e);
-					hasRemoved = true;
+                    RemoveEquipment(equipment[i]);
                     break;
                 }
                 else if (equipment[i].equipment.slot == Equipment.Slots.oneHand)
@@ -112,16 +110,16 @@ public class CharacterWrapper
                         old = equipment[i];
                     else
                     {
-                        RemoveEquipment(old, e);
-						hasRemoved = true;
+                        RemoveEquipment(old);
 						break;
                     }
                 }
             }
         }
         else if (e.equipment.slot == Equipment.Slots.bothHands)
-        {
-            for (int i = 0; i < equipment.Count - 1; i++)
+		{
+			bool hasRemoved = false;
+			for (int i = 0; i < equipment.Count - 1; i++)
             {
                 if (equipment[i].equipment.slot == Equipment.Slots.bothHands || equipment[i].equipment.slot == Equipment.Slots.oneHand)
                 {
@@ -134,7 +132,7 @@ public class CharacterWrapper
                     }
                     else
                     {
-                        RemoveEquipment(equipment[i], e);
+                        RemoveEquipment(equipment[i]);
 						i--;
 						hasRemoved = true;
 					}
@@ -147,17 +145,16 @@ public class CharacterWrapper
             {
                 if (equipment[i].equipment.slot == e.equipment.slot)
                 {
-                    RemoveEquipment(equipment[i], e);
-					hasRemoved = true;
+                    RemoveEquipment(equipment[i]);
 					break;
                 }
             }
         }
-		if (!hasRemoved && this == GameState.State.player)
-			GameState.State.battleManager.EquipEquipment(e);
+		if (this == GameState.State.player)
+			GameState.State.battleManager.RefreshStatus();
     }
 
-    public void RemoveEquipment(EquipmentWrapper e, EquipmentWrapper equip=null)
+    public void RemoveEquipment(EquipmentWrapper e)
     {
         if (equipment.Remove(e))
         {
@@ -166,16 +163,17 @@ public class CharacterWrapper
             constitution -= e.equipment.constitution;
             intelligence -= e.equipment.intelligence;
 
-            if (e.durability > 0 && this == GameState.State.player && equip != null)
+            if (e.durability > 0 && this == GameState.State.player)
             {
                 SwapPopup.Popup(e.ToString(), (b) => {
-                    if (b)
-                    {
-                        AddInventory(e);
-                        GameState.State.GetComponent<BattleManager>().EquipEquipment(equip);
-                    }
-                    else
-                        GameState.State.GetComponent<BattleManager>().ThrowEquipment(e);
+					if (b)
+					{
+						AddInventory(e);
+					}
+					else
+					{
+						GameState.State.battleManager.ThrowEquipment(e);
+					}
                 });
             }
 
@@ -233,9 +231,13 @@ public class CharacterWrapper
     public void NextMatch()
     {
         for (int i = 0; i < equipment.Count; i++)
-        {
-            equipment[i].NextMatch();
-        }
+		{
+			equipment[i].NextMatch();
+		}
+		for (int i = 0; i < inventory.Count; i++)
+		{
+			inventory[i].NextMatch();
+		}
         CalculateStats();
 		health = constitution;
 	}

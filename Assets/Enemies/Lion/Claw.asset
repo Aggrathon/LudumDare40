@@ -18,7 +18,7 @@ MonoBehaviour:
   - cooldown: 0
     name: Claw
     action: 1
-    amount: 6
+    amount: 5
   - cooldown: 0
     name: Maim
     action: 1

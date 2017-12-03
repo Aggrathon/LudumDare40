@@ -34,10 +34,7 @@ public class Inventory : MonoBehaviour {
             o.AddListener(() => {
                 cw.RemoveInventory(e);
                 cw.AddEquipment(e);
-				if (!GameState.State.tournament.gameObject.activeSelf)
-					gameObject.SetActive(false);
-				else
-					Refresh();
+				Refresh();
             });
             o = t.GetChild(1).GetComponent<Button>().onClick;
             o.RemoveAllListeners();

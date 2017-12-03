@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6c165b2e67144745940c67e4b76443c, type: 3}
   m_Name: Flamer Temerius
   m_EditorClassIdentifier: 
-  look: {fileID: 21300000, guid: ad544bbb0879b6441b1ed2c8093e2663, type: 3}
+  look: {fileID: 21300000, guid: cb9d89e13602ed040b62c1b947a1cea4, type: 3}
   strength: 6
   agility: 8
   constitution: 17

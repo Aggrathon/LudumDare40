@@ -31,53 +31,36 @@ public class CardUI : MonoBehaviour {
         }
         for (int i = list.Count; i < transform.childCount; i++)
             transform.GetChild(i).gameObject.SetActive(false);
-        if (hasInventory || !hasAction)
+        if (hasInventory)
         {
-            Transform t = transform.GetChild(list.Count);
-            t.GetChild(0).GetComponent<Image>().sprite = changeIcon;
-            Button b = t.GetComponent<Button>();
-            b.onClick.RemoveAllListeners();
-            if (hasInventory)
-            {
-                t.GetChild(1).GetComponent<Text>().text = "Swap Equipment";
-                b.onClick.AddListener(() => { onSelect(null, null); });
-            }
-            else
-            {
-                Equipment.Ability playerAction = new Equipment.Ability();
-                playerAction.action = Equipment.Action.none;
-                playerAction.name = "Wait";
-                t.GetChild(1).GetComponent<Text>().text = "Wait";
-                b.onClick.AddListener(() => { onSelect(null, playerAction); });
-            }
-            b.interactable = true;
-            t.gameObject.SetActive(true);
-        }
-        if (!hasInventory && list.Count == 0)
-        {
-            StartCoroutine(SurrenderButton(character));
-        }
+			Transform t = transform.GetChild(list.Count);
+			t.GetChild(0).GetComponent<Image>().sprite = changeIcon;
+			Button b = t.GetComponent<Button>();
+			b.onClick.RemoveAllListeners();
+            t.GetChild(1).GetComponent<Text>().text = "Swap Equipment";
+            b.onClick.AddListener(() => { onSelect(null, null); });
+			b.interactable = true;
+			t.gameObject.SetActive(true);
+		}
+        if (!hasAction)
+		{
+			Transform t = transform.GetChild(list.Count+1);
+			t.GetChild(0).GetComponent<Image>().sprite = changeIcon;
+			Button b = t.GetComponent<Button>();
+			b.onClick.RemoveAllListeners();
+			Equipment.Ability playerAction = new Equipment.Ability();
+            playerAction.action = Equipment.Action.none;
+            playerAction.name = "Wait";
+            t.GetChild(1).GetComponent<Text>().text = "Wait";
+            b.onClick.AddListener(() => { onSelect(null, playerAction); });
+			b.interactable = true;
+			t.gameObject.SetActive(true);
+		}
     }
 
     public void Clear()
     {
         for (int i = 0; i < transform.childCount; i++)
             transform.GetChild(i).gameObject.SetActive(false);
-    }
-
-    IEnumerator SurrenderButton(CharacterWrapper character)
-    {
-        yield return new WaitForSeconds(0.5f);
-        Transform t = transform.GetChild(0);
-        t.GetChild(0).GetComponent<Image>().sprite = surrenderIcon;
-        t.GetChild(1).GetComponent<Text>().text = "Surrender";
-        Button b = t.GetComponent<Button>();
-        b.onClick.RemoveAllListeners();
-        b.onClick.AddListener(() => {
-            FlashText.Flash("You Surrendered!", Color.red);
-            GameState.State.DefeatCharacter(character);
-        });
-        b.interactable = true;
-        t.gameObject.SetActive(true);
     }
 }

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: Centurion Gaius
   m_EditorClassIdentifier: 
   look: {fileID: 21300000, guid: ad544bbb0879b6441b1ed2c8093e2663, type: 3}
-  strength: 9
+  strength: 7
   agility: 6
   constitution: 15
   intelligence: 10

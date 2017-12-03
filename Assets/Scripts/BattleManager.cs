@@ -68,7 +68,7 @@ public class BattleManager : MonoBehaviour {
     IEnumerator BattleStart()
     {
         yield return new WaitForSeconds(0.1f);
-        RefreshStatus();
+        RefreshStatus(true);
         FlashText.Flash("Fight!", Color.red);
         yield return new WaitForSeconds(0.1f);
         battleUI.SetActive(true);
@@ -83,7 +83,9 @@ public class BattleManager : MonoBehaviour {
 		int mr = GameState.State.tournament.currentStageNum * (GameState.State.tournament.currentStageNum +1) * 50;
 		int ar = reward;
 		yield return new WaitForSeconds(0.1f);
-		CloseBattleUI();
+		battleUI.SetActive(false);
+		Inventory.Close();
+		playerFightButton.interactable = false;
 		GameState.State.DefeatCharacter(looser);
 		yield return new WaitForSeconds(0.1f);
 		if (looser == player)
@@ -137,43 +139,37 @@ public class BattleManager : MonoBehaviour {
 		enemyAnimation.SetLook(enemy.character.look);
 	}
 
-    void RefreshStatus()
+    public void RefreshStatus(bool force=false)
     {
-        playerHealth.SetHealth(player.health);
-        enemyHealth.SetHealth(enemy.health);
-        string eq = "";
-        for (int i = 0; i < enemy.equipment.Count; i++)
-        {
-            eq += enemy.equipment[i].equipment.name + "\n";
-        }
-        enemyEquipment.text = eq.Remove(eq.Length - 1);
-        playerStrength.text = "" + player.strength;
-        playerAgility.text = "" + player.agility;
-        playerConstitution.text = "" + player.constitution;
-        playerIntelligence.text = "" + player.intelligence;
-        playerCards.SetCards(player, SetPlayerAction);
+		if (battleUI.gameObject.activeSelf || force)
+		{
+			playerHealth.SetHealth(player.health);
+			enemyHealth.SetHealth(enemy.health);
+			string eq = "";
+			for (int i = 0; i < enemy.equipment.Count; i++)
+			{
+				eq += enemy.equipment[i].equipment.name + "\n";
+			}
+			enemyEquipment.text = eq.Remove(eq.Length - 1);
+			playerStrength.text = "" + player.strength;
+			playerAgility.text = "" + player.agility;
+			playerConstitution.text = "" + player.constitution;
+			playerIntelligence.text = "" + player.intelligence;
+			playerCards.SetCards(player, SetPlayerAction);
+		}
     }
 
     public void ThrowEquipment(EquipmentWrapper ew)
     {
         if (!battleUI.activeSelf)
             return;
-        Equipment.Ability ac = new Equipment.Ability();
+		Inventory.Close();
+		Equipment.Ability ac = new Equipment.Ability();
         ac.action = Equipment.Action.damage;
         ac.amount = ew.equipment.type == Equipment.Type.weapon ? 6 : 4;
         ac.name = "Throw " + ew.equipment.name;
         SetPlayerAction(ew, ac);
 		reward += 20;
-    }
-
-    public void EquipEquipment(EquipmentWrapper e)
-    {
-        if (!battleUI.activeSelf)
-            return;
-        Equipment.Ability ac = new Equipment.Ability();
-        ac.action = Equipment.Action.none;
-        ac.name = "Equip " + e.equipment.name;
-        SetPlayerAction(e, ac);
     }
 
     void SetPlayerAction(EquipmentWrapper e, Equipment.Ability action)
@@ -233,14 +229,13 @@ public class BattleManager : MonoBehaviour {
             case Equipment.Action.none:
                 break;
             case Equipment.Action.damage:
-                if(a2.action != Equipment.Action.block)
+				if (ca1 != null)
+					ca1.PlayAttack();
+				if (a2.action != Equipment.Action.block)
                 {
                     DoDamage(p2, a1.amount);
-					if (ca1 != null)
-					{
-						ca1.PlayAttack();
+					if (ca2 != null)
 						ca2.PlayDamage();
-					}
 				}
 				else if (p2 == player)
 				{
@@ -248,15 +243,14 @@ public class BattleManager : MonoBehaviour {
 				}
 				break;
             case Equipment.Action.damageStrength:
-                if (a2.action != Equipment.Action.block)
+				if (ca1 != null)
+					ca1.PlayAttack();
+				if (a2.action != Equipment.Action.block)
                 {
                     float damage = p1.strength * a1.amount;
                     DoDamage(p2, damage);
-					if (ca1 != null)
-					{
-						ca1.PlayAttack();
+					if (ca2 != null)
 						ca2.PlayDamage();
-					}
 				}
 				else if (p2 == player)
 				{
@@ -264,15 +258,14 @@ public class BattleManager : MonoBehaviour {
 				}
 				break;
             case Equipment.Action.damageAgility:
-                if (a2.action != Equipment.Action.block)
+				if (ca1 != null)
+					ca1.PlayAttack();
+				if (a2.action != Equipment.Action.block)
                 {
                     float damage = p1.agility * a1.amount;
                     DoDamage(p2, damage);
-					if (ca1 != null)
-					{
-						ca1.PlayAttack();
+					if (ca2 != null)
 						ca2.PlayDamage();
-					}
 				}
 				else if (p2 == player)
 				{

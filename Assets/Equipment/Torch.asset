@@ -18,12 +18,12 @@ MonoBehaviour:
   - cooldown: 0
     name: Swing
     action: 1
-    amount: 10
+    amount: 8
   - cooldown: 0
     name: Prepare
     action: 0
     amount: 14
-  durability: 8
+  durability: 7
   strength: 2
   agility: 2
   constitution: 0
