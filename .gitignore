@@ -354,3 +354,5 @@ __pycache__/
 *.blend2
 *.blend1.meta
 *.blend2.meta
+*.xcf
+*.xcf.meta
