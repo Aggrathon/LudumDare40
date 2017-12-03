@@ -23,7 +23,7 @@ MonoBehaviour:
     name: Attack
     action: 2
     amount: 1
-  durability: 10
+  durability: 8
   strength: 0
   agility: 2
   constitution: 0

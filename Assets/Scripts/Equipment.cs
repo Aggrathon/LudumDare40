@@ -17,7 +17,8 @@ public class Equipment : ScriptableObject {
     {
         weapon,
         aggressive,
-        defensive,
+        armor,
+		shield,
         utility
     }
 

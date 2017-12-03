@@ -124,7 +124,7 @@ public class BattleManager : MonoBehaviour {
         this.enemy = enemy;
         enemyName.text = enemy.character.name;
         playerFightButton.interactable = true;
-		reward = 0;
+		reward = 7 + player.inventory.Count*5;
     }
 
     void RefreshStatus()
@@ -153,7 +153,7 @@ public class BattleManager : MonoBehaviour {
         ac.amount = ew.equipment.type == Equipment.Type.weapon ? 6 : 4;
         ac.name = "Throw " + ew.equipment.name;
         SetPlayerAction(ew, ac);
-		reward += 10;
+		reward += 20;
     }
 
     public void EquipEquipment(EquipmentWrapper e)
@@ -222,7 +222,7 @@ public class BattleManager : MonoBehaviour {
 				}
 				else if (p2 == player)
 				{
-					reward += 10;
+					reward += 15;
 				}
 				break;
             case Equipment.Action.damageStrength:
@@ -233,7 +233,7 @@ public class BattleManager : MonoBehaviour {
 				}
 				else if (p2 == player)
 				{
-					reward += 10;
+					reward += 15;
 				}
 				break;
             case Equipment.Action.damageAgility:
@@ -244,7 +244,7 @@ public class BattleManager : MonoBehaviour {
                 }
 				else if (p2 == player)
 				{
-					reward += 10;
+					reward += 15;
 				}
                 break;
             case Equipment.Action.block:
@@ -252,7 +252,7 @@ public class BattleManager : MonoBehaviour {
 			case Equipment.Action.cheer:
 				if (p1 == player)
 				{
-					reward += 20;
+					reward += 30;
 				}
 				break;
             default:
@@ -266,7 +266,7 @@ public class BattleManager : MonoBehaviour {
         for (int i = 0; i < c.equipment.Count; i++)
         {
             var e = c.equipment[(rnd + i) % c.equipment.Count];
-            if (e.equipment.type == Equipment.Type.defensive)
+            if (e.equipment.type == Equipment.Type.armor)
             {
                 c.health -= Mathf.RoundToInt(amount * 0.5f);
                 e.durability -= Mathf.RoundToInt(amount * 0.3f);

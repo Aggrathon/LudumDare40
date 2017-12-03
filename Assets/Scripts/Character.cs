@@ -270,7 +270,7 @@ public class CharacterWrapper
         {
             for (int i = 0; i < equipment.Count; i++)
             {
-                if(equipment[i].equipment.type == Equipment.Type.aggressive || equipment[i].equipment.type == Equipment.Type.weapon && equipment[i].cooldown <= 0)
+                if((equipment[i].equipment.type == Equipment.Type.aggressive || equipment[i].equipment.type == Equipment.Type.weapon) && equipment[i].cooldown <= 0)
                 {
                     e = equipment[i];
                     int r = Random.Range(0, equipment.Count);
@@ -295,7 +295,7 @@ public class CharacterWrapper
             {
                 for (int i = 0; i < equipment.Count; i++)
                 {
-                    if (equipment[i].equipment.type == Equipment.Type.defensive && equipment[i].cooldown <= 0)
+                    if ((equipment[i].equipment.type == Equipment.Type.armor || equipment[i].equipment.type == Equipment.Type.shield) && equipment[i].cooldown <= 0)
                     {
                         e = equipment[i];
                         int r = Random.Range(0, equipment.Count);
