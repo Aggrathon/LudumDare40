@@ -22,6 +22,8 @@ public class Lootbox : MonoBehaviour {
 
 	void Refresh()
 	{
+		Inventory.Close();
+		GameState.State.tournament.gameObject.SetActive(false);
 		description.text = "Select " + num;
 		while(transform.childCount < content.Count + 2)
 			Instantiate(transform.GetChild(2).gameObject, transform);

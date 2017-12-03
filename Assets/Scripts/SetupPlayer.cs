@@ -15,8 +15,7 @@ public class SetupPlayer : MonoBehaviour {
 		player.CalculateStats();
 		for (int i = 0; i < player.equipment.Count; i++)
 		{
-			if (player.equipment[i].equipment.type == Equipment.Type.weapon)
-				player.equipment[i].durability /= 2;
+			player.equipment[i].durability /= 2;
 		}
 	}
 }

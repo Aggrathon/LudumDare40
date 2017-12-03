@@ -19,6 +19,7 @@ MonoBehaviour:
   equipment:
   - {fileID: 11400000, guid: 5c6c2d5c6ad98d246aa3b1f06aca0a8b, type: 2}
   - {fileID: 11400000, guid: b3ddddc02ac482e4ba8af028390c93f3, type: 2}
+  - {fileID: 11400000, guid: 9045b89c5662daf45aa260ccf57e357a, type: 2}
   aggressive: 0.5
   defensive: 0.5
   utility: 0.2
@@ -26,3 +27,4 @@ MonoBehaviour:
   agilityUpgrade: 0
   constitutionUpgrade: 0
   intelligenceUpgrade: 2
+  upgrades: []

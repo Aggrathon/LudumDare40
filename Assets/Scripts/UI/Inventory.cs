@@ -20,8 +20,8 @@ public class Inventory : MonoBehaviour {
         {
             equipped += "\n"+cw.equipment[i].ToStringLong();
         }
-        transform.GetChild(2).GetComponent<Text>().text = equipped;
-        int offset = 5;
+        transform.GetChild(3).GetComponent<Text>().text = equipped;
+        int offset = 6;
         while (transform.childCount - offset < cw.inventory.Count)
             Instantiate(transform.GetChild(offset).gameObject, transform);
         for (int i = 0; i < cw.inventory.Count; i++)
