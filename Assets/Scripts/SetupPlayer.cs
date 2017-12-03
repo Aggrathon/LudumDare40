@@ -7,17 +7,16 @@ public class SetupPlayer : MonoBehaviour {
     public Equipment[] inventory;
     
 	void Start () {
-        for (int i = 0; i < GameState.State.league.Count; i++)
+		var player = GameState.State.player;
+        for (int j = 0; j < inventory.Length; j++)
         {
-            var c = GameState.State.league[i];
-            if (c.character.name == "Player")
-            {
-                for (int j = 0; j < inventory.Length; j++)
-                {
-                    c.inventory.Add(new EquipmentWrapper(inventory[j]));
-                }
-                c.CalculateStats();
-            }
+			player.inventory.Add(new EquipmentWrapper(inventory[j]));
         }
+		player.CalculateStats();
+		for (int i = 0; i < player.equipment.Count; i++)
+		{
+			if (player.equipment[i].equipment.type == Equipment.Type.weapon)
+				player.equipment[i].durability /= 2;
+		}
 	}
 }

@@ -10,7 +10,6 @@ public class TournamentUI : MonoBehaviour {
 
     [System.NonSerialized] public List<CharacterWrapper> currentStage;
     [System.NonSerialized] public int currentStageNum = 0;
-    CharacterWrapper player;
 
     private void Awake()
     {
@@ -24,10 +23,9 @@ public class TournamentUI : MonoBehaviour {
         for (int i = 0; i < len; i++)
         {
             stages[currentStageNum].GetChild(i + 1).GetChild(0).GetComponent<Text>().text = stage[i].character.name;
-            if(stage[i].character.name == "Player")
+            if(stage[i] == GameState.State.player)
             {
                 stages[currentStageNum].GetChild(i + 1).GetComponent<Image>().color = GameState.playerColor;
-                player = stage[i];
             }
         }
         currentStageNum++;
@@ -47,11 +45,16 @@ public class TournamentUI : MonoBehaviour {
     public void Quit()
     {
         SceneManager.LoadScene(0);
-    }
+	}
 
-    public void Shop()
-    {
-        Inventory.Show(player);
-    }
+	public void Shop()
+	{
+		Lootbox.OpenCheapSmall();
+	}
+
+	public void ShowInventory()
+	{
+		Inventory.Show(GameState.State.player);
+	}
 
 }

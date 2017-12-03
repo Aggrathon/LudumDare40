@@ -49,7 +49,8 @@ public class CharacterWrapper
             equipment.Add(new EquipmentWrapper(character.equipment[i]));
         }
         CalculateStats();
-    }
+		health = constitution;
+	}
 
     public void CalculateStats()
     {
@@ -73,8 +74,8 @@ public class CharacterWrapper
         agility += character.agilityUpgrade*stage;
         constitution += character.constitutionUpgrade*stage;
         intelligence += character.intelligenceUpgrade*stage;
-        health = constitution;
-    }
+		health = Mathf.Min(health, constitution);
+	}
 
     public void AddEquipment(Equipment e)
     {
@@ -154,7 +155,7 @@ public class CharacterWrapper
             constitution -= e.equipment.constitution;
             intelligence -= e.equipment.intelligence;
 
-            if (e.durability > 0 && character.name == "Player" && equip != null)
+            if (e.durability > 0 && this == GameState.State.player && equip != null)
             {
                 SwapPopup.Popup(e.ToString(), (b) => {
                     if (b)
@@ -227,16 +228,15 @@ public class CharacterWrapper
             equipment[i].NextMatch();
         }
         CalculateStats();
-    }
+		health = constitution;
+	}
 
     public void NextStage()
     {
         stage++;
-        strength += character.strengthUpgrade;
-        agility += character.agilityUpgrade;
-        constitution += character.constitutionUpgrade;
-        intelligence += character.intelligenceUpgrade;
-    }
+		CalculateStats();
+		health = constitution;
+	}
 
     public EquipmentWrapper GetAbility(out Equipment.Ability ability)
     {

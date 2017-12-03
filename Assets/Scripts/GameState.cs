@@ -10,6 +10,7 @@ public class GameState : MonoBehaviour {
     
     [System.NonSerialized] public List<CharacterWrapper> league;
     [SerializeField] Character[] startingLeauge;
+	[System.NonSerialized] public CharacterWrapper player;
 
     public TournamentUI tournament;
 
@@ -22,6 +23,8 @@ public class GameState : MonoBehaviour {
         for (int i = 0; i < startingLeauge.Length; i++)
         {
             league.Add(new CharacterWrapper(startingLeauge[i]));
+			if (startingLeauge[i].name == "Player")
+				player = league[league.Count - 1];
         }
         ShuffleLeage();
         bm = GetComponent<BattleManager>();

@@ -30,9 +30,9 @@ public class BattleManager : MonoBehaviour {
     {
         playerOne.NextMatch();
         playerTwo.NextMatch();
-        if (playerOne.character.name == "Player")
+        if (playerOne == GameState.State.player)
             PlayerBattle(playerOne, playerTwo);
-        else if (playerTwo.character.name == "Player")
+        else if (playerTwo == GameState.State.player)
             PlayerBattle(playerTwo, playerOne);
         else
         {
@@ -232,9 +232,8 @@ public class BattleManager : MonoBehaviour {
             var e = c.equipment[(rnd + i) % c.equipment.Count];
             if (e.equipment.type == Equipment.Type.defensive)
             {
-                int d = Mathf.RoundToInt(amount * 0.5f);
-                c.health -= d;
-                e.durability -= d;
+                c.health -= Mathf.RoundToInt(amount * 0.5f);
+                e.durability -= Mathf.RoundToInt(amount * 0.3f);
                 if (e.durability <= 0)
                 {
                     c.RemoveEquipment(e);

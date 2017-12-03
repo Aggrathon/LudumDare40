@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   strength: 14
   agility: 14
-  constitution: 12
+  constitution: 16
   intelligence: 8
   baseWeapon: {fileID: 0}
   equipment:

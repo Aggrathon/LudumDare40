@@ -38,7 +38,7 @@ public class Inventory : MonoBehaviour {
             });
             o = t.GetChild(1).GetComponent<Button>().onClick;
             o.RemoveAllListeners();
-            o.AddListener(() => { cw.RemoveInventory(e); });
+            o.AddListener(() => { cw.RemoveInventory(e); Refresh(); });
             t.gameObject.SetActive(true);
         }
         for (int i = cw.inventory.Count+offset; i < transform.childCount; i++)
