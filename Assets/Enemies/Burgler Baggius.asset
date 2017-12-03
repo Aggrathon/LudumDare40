@@ -22,9 +22,9 @@ MonoBehaviour:
   aggressive: 0.5
   defensive: 0.5
   utility: 0.2
-  strengthUpgrade: 2
-  agilityUpgrade: 2
-  constitutionUpgrade: 4
+  strengthUpgrade: 0
+  agilityUpgrade: 0
+  constitutionUpgrade: 3
   intelligenceUpgrade: 2
   upgrades:
   - {fileID: 11400000, guid: 395b3d6e48db5ce4ebd4f3aee7faad7d, type: 2}

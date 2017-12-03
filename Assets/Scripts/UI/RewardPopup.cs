@@ -33,7 +33,7 @@ public class RewardPopup : MonoBehaviour {
 	{
 		gameObject.SetActive(false);
 		var list = looser.equipment;
-		list.RemoveAll(m => m.durability < 2);
+		list.RemoveAll(m => m.durability <= 2);
 		if (list.Count == 0)
 		{
 			Lootbox.OpenCheapSmall();

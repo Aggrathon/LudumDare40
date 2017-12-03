@@ -22,7 +22,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b64fa063409f0184da77d7bd757b996a, type: 2}
   aggressive: 0.5
   defensive: 0.5
-  utility: 1
+  utility: 0.6
   strengthUpgrade: 2
   agilityUpgrade: 2
   constitutionUpgrade: 2
