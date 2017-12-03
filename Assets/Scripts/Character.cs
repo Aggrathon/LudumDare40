@@ -5,7 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(menuName ="SO/Enemy")]
 public class Character : ScriptableObject {
 
-    public int strength = 20;
+	public Sprite look;
+	public int strength = 20;
     public int agility = 20;
     public int constitution = 20;
     public int intelligence = 20;

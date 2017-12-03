@@ -16,6 +16,10 @@ public class BattleManager : MonoBehaviour {
     public Text playerAgility;
     public Text playerConstitution;
     public Text playerIntelligence;
+	[Space]
+	public CombatAnimation playerAnimation;
+	public CombatAnimation enemyAnimation;
+
     CharacterWrapper player;
     CharacterWrapper enemy;
 
@@ -46,7 +50,9 @@ public class BattleManager : MonoBehaviour {
         battleUI.SetActive(false);
         Inventory.Close();
         playerFightButton.interactable = false;
-    }
+		playerAnimation.gameObject.SetActive(false);
+		enemyAnimation.gameObject.SetActive(false);
+	}
 
     public void OpenBattleUI()
     {
@@ -54,7 +60,9 @@ public class BattleManager : MonoBehaviour {
         SwapPopup.Close();
         Inventory.Close();
 		Shop.Close();
-        StartCoroutine(BattleStart());
+		playerAnimation.gameObject.SetActive(true);
+		enemyAnimation.gameObject.SetActive(true);
+		StartCoroutine(BattleStart());
     }
 
     IEnumerator BattleStart()
@@ -97,8 +105,8 @@ public class BattleManager : MonoBehaviour {
             EquipmentWrapper oneEquip = playerOne.GetAbility(out oneAction);
             Equipment.Ability twoAction;
             EquipmentWrapper twoEquip = playerTwo.GetAbility(out twoAction);
-            HandleAction(playerOne, playerTwo, ref oneAction, ref twoAction, false);
-            HandleAction(playerTwo, playerOne, ref twoAction, ref oneAction, false);
+            HandleAction(playerOne, playerTwo, ref oneAction, ref twoAction);
+            HandleAction(playerTwo, playerOne, ref twoAction, ref oneAction);
             if (oneEquip != null)
                 playerOne.RemoveEquipment(oneEquip);
             if (twoEquip != null)
@@ -125,7 +133,9 @@ public class BattleManager : MonoBehaviour {
         enemyName.text = enemy.character.name;
         playerFightButton.interactable = true;
 		reward = 7 + player.inventory.Count*5;
-    }
+		playerAnimation.SetLook(player.character.look);
+		enemyAnimation.SetLook(enemy.character.look);
+	}
 
     void RefreshStatus()
     {
@@ -184,8 +194,8 @@ public class BattleManager : MonoBehaviour {
             Equipment.Ability enemyAction;
             var ee = enemy.GetAbility(out enemyAction);
             FlashText.Flash(enemyAction.name + "\n\n\n\n" + playerAction.name, Color.white);
-            HandleAction(player, enemy, ref playerAction, ref enemyAction, true);
-            HandleAction(enemy, player, ref enemyAction, ref playerAction, true);
+            HandleAction(player, enemy, ref playerAction, ref enemyAction, playerAnimation, enemyAnimation);
+            HandleAction(enemy, player, ref enemyAction, ref playerAction, enemyAnimation, playerAnimation);
             if (remove)
             {
                 FlashText.Flash("Your "+e.equipment.name.ToLower()+" broke!", Color.red);
@@ -216,7 +226,7 @@ public class BattleManager : MonoBehaviour {
         RefreshStatus();
     }
 
-    void HandleAction(CharacterWrapper p1, CharacterWrapper p2, ref Equipment.Ability a1, ref Equipment.Ability a2, bool visual)
+    void HandleAction(CharacterWrapper p1, CharacterWrapper p2, ref Equipment.Ability a1, ref Equipment.Ability a2, CombatAnimation ca1 = null, CombatAnimation ca2 = null)
     {
         switch (a1.action)
         {
@@ -226,6 +236,11 @@ public class BattleManager : MonoBehaviour {
                 if(a2.action != Equipment.Action.block)
                 {
                     DoDamage(p2, a1.amount);
+					if (ca1 != null)
+					{
+						ca1.PlayAttack();
+						ca2.PlayDamage();
+					}
 				}
 				else if (p2 == player)
 				{
@@ -237,6 +252,11 @@ public class BattleManager : MonoBehaviour {
                 {
                     float damage = p1.strength * a1.amount;
                     DoDamage(p2, damage);
+					if (ca1 != null)
+					{
+						ca1.PlayAttack();
+						ca2.PlayDamage();
+					}
 				}
 				else if (p2 == player)
 				{
@@ -248,15 +268,28 @@ public class BattleManager : MonoBehaviour {
                 {
                     float damage = p1.agility * a1.amount;
                     DoDamage(p2, damage);
-                }
+					if (ca1 != null)
+					{
+						ca1.PlayAttack();
+						ca2.PlayDamage();
+					}
+				}
 				else if (p2 == player)
 				{
 					reward += 15;
 				}
                 break;
             case Equipment.Action.block:
-                break;
+				if (ca1 != null)
+				{
+					ca1.PlayBlock();
+				}
+				break;
 			case Equipment.Action.cheer:
+				if (ca1 != null)
+				{
+					ca1.PlayUtility();
+				}
 				if (p1 == player)
 				{
 					reward += 30;
