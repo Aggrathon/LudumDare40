@@ -93,7 +93,6 @@ public class CharacterWrapper
         agility += e.equipment.agility;
         constitution += e.equipment.constitution;
         intelligence += e.equipment.intelligence;
-        health = Mathf.Min(health, constitution);
 		bool hasRemoved = false;
         if (e.equipment.slot == Equipment.Slots.oneHand)
         {
@@ -195,7 +194,6 @@ public class CharacterWrapper
                     AddEquipment(character.baseWeapon);
                 }
             }
-            health = Mathf.Min(health, constitution);
         }
     }
 
@@ -206,7 +204,6 @@ public class CharacterWrapper
         agility--;
         constitution--;
         intelligence--;
-        health = Mathf.Min(health, constitution);
         if (this == GameState.State.player)
             FlashText.Flash("All Stats: -1", Color.red);
     }

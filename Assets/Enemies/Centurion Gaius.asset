@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   strength: 9
   agility: 6
-  constitution: 16
+  constitution: 15
   intelligence: 10
   baseWeapon: {fileID: 11400000, guid: 5c6c2d5c6ad98d246aa3b1f06aca0a8b, type: 2}
   equipment:
@@ -29,8 +29,8 @@ MonoBehaviour:
   intelligenceUpgrade: 2
   upgrades:
   - {fileID: 11400000, guid: 9045b89c5662daf45aa260ccf57e357a, type: 2}
-  - {fileID: 11400000, guid: 7364685925e434f45a936326661931f0, type: 2}
   - {fileID: 11400000, guid: 40d3fe37e1394bb40a26abe84c52a23e, type: 2}
+  - {fileID: 11400000, guid: 7364685925e434f45a936326661931f0, type: 2}
   - {fileID: 11400000, guid: 8d3996f68ca908945b2a22f6ada5d394, type: 2}
   - {fileID: 11400000, guid: 7364685925e434f45a936326661931f0, type: 2}
   - {fileID: 11400000, guid: 40d3fe37e1394bb40a26abe84c52a23e, type: 2}
