@@ -52,6 +52,7 @@ public class BattleManager : MonoBehaviour {
         GameState.State.tournament.gameObject.SetActive(false);
         SwapPopup.Close();
         Inventory.Close();
+		Shop.Close();
         StartCoroutine(BattleStart());
     }
 

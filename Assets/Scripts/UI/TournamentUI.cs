@@ -47,9 +47,9 @@ public class TournamentUI : MonoBehaviour {
         SceneManager.LoadScene(0);
 	}
 
-	public void Shop()
+	public void ShowShop()
 	{
-		Lootbox.OpenCheapSmall();
+		Shop.Open();
 	}
 
 	public void ShowInventory()

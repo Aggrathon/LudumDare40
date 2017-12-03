@@ -7,7 +7,8 @@ public class GameState : MonoBehaviour {
 
     public static GameState State { get; protected set; }
     public static Color playerColor = Color.white;
-    
+
+	public int money = 100;
     [System.NonSerialized] public List<CharacterWrapper> league;
     [SerializeField] Character[] startingLeauge;
 	[System.NonSerialized] public CharacterWrapper player;

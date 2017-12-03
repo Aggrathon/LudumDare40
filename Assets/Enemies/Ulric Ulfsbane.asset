@@ -19,7 +19,6 @@ MonoBehaviour:
   equipment:
   - {fileID: 11400000, guid: dde79941d8fb2984e9228c02121126a9, type: 2}
   - {fileID: 11400000, guid: 9045b89c5662daf45aa260ccf57e357a, type: 2}
-  - {fileID: 11400000, guid: dde79941d8fb2984e9228c02121126a9, type: 2}
   aggressive: 1
   defensive: 0.5
   utility: 0.5
