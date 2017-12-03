@@ -59,6 +59,12 @@ public class CardUI : MonoBehaviour {
         }
     }
 
+    public void Clear()
+    {
+        for (int i = 0; i < transform.childCount; i++)
+            transform.GetChild(i).gameObject.SetActive(false);
+    }
+
     IEnumerator SurrenderButton(CharacterWrapper character)
     {
         yield return new WaitForSeconds(0.5f);

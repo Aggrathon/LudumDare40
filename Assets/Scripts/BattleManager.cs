@@ -174,6 +174,7 @@ public class BattleManager : MonoBehaviour {
         }
         else
         {
+            playerCards.Clear();
             Equipment.Ability playerAction;
             bool remove = false;
             if (action != null)
@@ -202,11 +203,17 @@ public class BattleManager : MonoBehaviour {
                 StartCoroutine(BattleOver(enemy));
                 return;
             }
-            player.NextTurn();
-            enemy.NextTurn();
-            RefreshStatus();
 			reward += 3;
+            StartCoroutine(DelayedNextTurn());
         }
+    }
+
+    IEnumerator DelayedNextTurn()
+    {
+        yield return new WaitForSeconds(0.4f);
+        player.NextTurn();
+        enemy.NextTurn();
+        RefreshStatus();
     }
 
     void HandleAction(CharacterWrapper p1, CharacterWrapper p2, ref Equipment.Ability a1, ref Equipment.Ability a2, bool visual)
