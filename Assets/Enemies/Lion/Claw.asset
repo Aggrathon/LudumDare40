@@ -18,11 +18,11 @@ MonoBehaviour:
   - cooldown: 0
     name: Claw
     action: 1
-    amount: 4
+    amount: 6
   - cooldown: 0
     name: Maim
     action: 1
-    amount: 4
+    amount: 6
   durability: 2
   strength: 0
   agility: 0

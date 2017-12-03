@@ -17,7 +17,7 @@ MonoBehaviour:
   intelligence: 20
   baseWeapon: {fileID: 11400000, guid: 252692c2351d7bd459fdbe709fd124a6, type: 2}
   equipment:
-  - {fileID: 11400000, guid: 252692c2351d7bd459fdbe709fd124a6, type: 2}
+  - {fileID: 11400000, guid: 395b3d6e48db5ce4ebd4f3aee7faad7d, type: 2}
   - {fileID: 11400000, guid: 252692c2351d7bd459fdbe709fd124a6, type: 2}
   aggressive: 0.5
   defensive: 0.5

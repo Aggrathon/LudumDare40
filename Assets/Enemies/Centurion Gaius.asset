@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6c165b2e67144745940c67e4b76443c, type: 3}
   m_Name: Centurion Gaius
   m_EditorClassIdentifier: 
-  strength: 10
+  strength: 9
   agility: 6
   constitution: 16
   intelligence: 10

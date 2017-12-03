@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6c165b2e67144745940c67e4b76443c, type: 3}
   m_Name: Ulric Ulfsbane
   m_EditorClassIdentifier: 
-  strength: 6
+  strength: 8
   agility: 8
   constitution: 14
   intelligence: 6
@@ -22,7 +22,7 @@ MonoBehaviour:
   aggressive: 1
   defensive: 0.5
   utility: 0.5
-  strengthUpgrade: 4
+  strengthUpgrade: 3
   agilityUpgrade: 4
   constitutionUpgrade: 2
   intelligenceUpgrade: 1

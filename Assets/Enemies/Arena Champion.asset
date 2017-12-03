@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6c165b2e67144745940c67e4b76443c, type: 3}
   m_Name: Arena Champion
   m_EditorClassIdentifier: 
-  strength: 12
+  strength: 10
   agility: 12
   constitution: 20
   intelligence: 2

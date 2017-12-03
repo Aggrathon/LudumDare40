@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6c165b2e67144745940c67e4b76443c, type: 3}
   m_Name: Lion
   m_EditorClassIdentifier: 
-  strength: 8
+  strength: 9
   agility: 8
   constitution: 20
   intelligence: 2
@@ -23,7 +23,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: eefbd2fb906c0cb4aa61ab22507c32f2, type: 2}
   aggressive: 0.5
   defensive: 0.5
-  utility: 1
+  utility: 0.5
   strengthUpgrade: 2
   agilityUpgrade: 2
   constitutionUpgrade: 2
