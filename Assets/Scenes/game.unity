@@ -7355,12 +7355,21 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9045b89c5662daf45aa260ccf57e357a, type: 2}
   - {fileID: 11400000, guid: b3ddddc02ac482e4ba8af028390c93f3, type: 2}
   - {fileID: 11400000, guid: 5c6c2d5c6ad98d246aa3b1f06aca0a8b, type: 2}
+  - {fileID: 11400000, guid: 395b3d6e48db5ce4ebd4f3aee7faad7d, type: 2}
+  - {fileID: 11400000, guid: 40d3fe37e1394bb40a26abe84c52a23e, type: 2}
+  - {fileID: 11400000, guid: 7b7832e82d55b924889e24b091f772cd, type: 2}
+  - {fileID: 11400000, guid: 252692c2351d7bd459fdbe709fd124a6, type: 2}
+  - {fileID: 11400000, guid: f348c21afa5ad1d40a258bea319aa6a8, type: 2}
   expensiveLoot:
   - {fileID: 11400000, guid: b3ddddc02ac482e4ba8af028390c93f3, type: 2}
-  - {fileID: 11400000, guid: dde79941d8fb2984e9228c02121126a9, type: 2}
   - {fileID: 11400000, guid: 2a62193cca73a2a49bcc59b765c8bc02, type: 2}
   - {fileID: 11400000, guid: 238e1792a735ac043b390cbb9db39904, type: 2}
   - {fileID: 11400000, guid: a81b37608ebd7954087773b1bd2ac287, type: 2}
+  - {fileID: 11400000, guid: 396fc8a7b330ed14a9b37d442a8ac873, type: 2}
+  - {fileID: 11400000, guid: f348c21afa5ad1d40a258bea319aa6a8, type: 2}
+  - {fileID: 11400000, guid: 8d3996f68ca908945b2a22f6ada5d394, type: 2}
+  - {fileID: 11400000, guid: 11d5e3ba78d27b54a811f3300c6675f5, type: 2}
+  - {fileID: 11400000, guid: 7364685925e434f45a936326661931f0, type: 2}
   description: {fileID: 1221113920}
 --- !u!114 &951755688
 MonoBehaviour:
@@ -12210,8 +12219,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 63bc24427864a4e4c83ec201af61f733, type: 2}
   - {fileID: 11400000, guid: a759493a72dc93041a4226c5b0bb8112, type: 2}
   - {fileID: 11400000, guid: 8199f73819d80ac40bc44ad693419df6, type: 2}
-  - {fileID: 11400000, guid: 7cb215e0c318e2040be56938bab61878, type: 2}
-  - {fileID: 11400000, guid: a759493a72dc93041a4226c5b0bb8112, type: 2}
+  - {fileID: 11400000, guid: 769ec06cf0e0f5e438bc95e6c735331d, type: 2}
+  - {fileID: 11400000, guid: c75e136190f7b6c4a9bab954ec716826, type: 2}
   tournament: {fileID: 289469125}
 --- !u!4 &1702721473
 Transform:

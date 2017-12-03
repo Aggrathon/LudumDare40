@@ -67,7 +67,7 @@ public class Lootbox : MonoBehaviour {
 	{
 		instance.content = new List<EquipmentWrapper>();
 		instance.num = 2;
-		for (int i = 0; i < 2; i++)
+		for (int i = 0; i < 3; i++)
 		{
 			var e = new EquipmentWrapper(instance.cheapLoot[Random.Range(0, instance.cheapLoot.Length)]);
 			e.durability = (Random.Range(1, e.durability - 1) + Random.Range(1, e.durability - 1)) / 2;
@@ -80,7 +80,7 @@ public class Lootbox : MonoBehaviour {
 	{
 		instance.content = new List<EquipmentWrapper>();
 		instance.num = 3;
-		for (int i = 0; i < 5; i++)
+		for (int i = 0; i < 6; i++)
 		{
 			var e = new EquipmentWrapper(instance.cheapLoot[Random.Range(0, instance.cheapLoot.Length)]);
 			e.durability = (Random.Range(1, e.durability - 1) + Random.Range(1, e.durability - 1)) / 2;
@@ -93,7 +93,7 @@ public class Lootbox : MonoBehaviour {
 	{
 		instance.content = new List<EquipmentWrapper>();
 		instance.num = 1;
-		for (int i = 0; i < 2; i++)
+		for (int i = 0; i < 3; i++)
 		{
 			var e = new EquipmentWrapper(instance.expensiveLoot[Random.Range(0, instance.expensiveLoot.Length)]);
 			e.durability = (Random.Range(1, e.durability - 1) + Random.Range(1, e.durability - 1)) / 2;
@@ -106,7 +106,7 @@ public class Lootbox : MonoBehaviour {
 	{
 		instance.content = new List<EquipmentWrapper>();
 		instance.num = 2;
-		for (int i = 0; i < 4; i++)
+		for (int i = 0; i < 6; i++)
 		{
 			var e = new EquipmentWrapper(instance.expensiveLoot[Random.Range(0, instance.expensiveLoot.Length)]);
 			e.durability = (Random.Range(1, e.durability - 1) + Random.Range(1, e.durability - 1)) / 2;
