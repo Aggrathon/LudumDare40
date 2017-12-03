@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class MainMenu : MonoBehaviour {
 
     public Button[] colorButtons;
+	public Toggle tutorial;
 
     private void Start()
     {
@@ -18,7 +19,8 @@ public class MainMenu : MonoBehaviour {
             colorButtons[i].onClick.AddListener(() => { SetColor(j); });
         }
         colorButtons[0].interactable = false;
-    }
+		tutorial.isOn = GameState.tutorial;
+	}
 
     void SetColor(int j)
     {
@@ -39,6 +41,7 @@ public class MainMenu : MonoBehaviour {
                 break;
             }
         }
+		GameState.tutorial = tutorial.isOn;
         SceneManager.LoadScene(1);
     }
 
