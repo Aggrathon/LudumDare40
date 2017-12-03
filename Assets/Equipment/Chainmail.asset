@@ -9,22 +9,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 97d8b50e4eca3cd4197acedff62b4bd4, type: 3}
-  m_Name: Hatchet
+  m_Name: Chainmail
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 3a4990fbc8b5edb49b209d1ff9554f67, type: 3}
-  slot: 2
-  type: 0
-  actions:
-  - cooldown: 0
-    name: Prepare
-    action: 0
-    amount: 0
-  - cooldown: 0
-    name: Attack
-    action: 2
-    amount: 0.8
-  durability: 5
-  strength: 1
-  agility: 1
-  constitution: 0
+  icon: {fileID: 21300000, guid: 3d7c1892fe881404b80abdd31c2007b1, type: 3}
+  slot: 1
+  type: 2
+  actions: []
+  durability: 10
+  strength: -2
+  agility: -2
+  constitution: 6
   intelligence: 0

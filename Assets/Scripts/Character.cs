@@ -23,6 +23,7 @@ public class Character : ScriptableObject {
     public int agilityUpgrade = 2;
     public int constitutionUpgrade = 2;
     public int intelligenceUpgrade = 2;
+	public List<Equipment> upgrades;
 }
 
 [System.Serializable]
@@ -79,6 +80,8 @@ public class CharacterWrapper
 
     public void AddEquipment(Equipment e)
     {
+		if (e == null)
+			return;
         AddEquipment(new EquipmentWrapper(e));
     }
 
@@ -196,7 +199,7 @@ public class CharacterWrapper
         constitution--;
         intelligence--;
         health = Mathf.Min(health, constitution);
-        if (character.name == "Player")
+        if (this == GameState.State.player)
             FlashText.Flash("All Stats: -1", Color.red);
     }
 
@@ -208,7 +211,7 @@ public class CharacterWrapper
             agility++;
             constitution++;
             intelligence++;
-            if (character.name == "Player")
+            if (this == GameState.State.player)
                 FlashText.Flash("All Stats: +1", Color.green);
         }
     }
@@ -234,6 +237,11 @@ public class CharacterWrapper
     public void NextStage()
     {
         stage++;
+		int len = character.upgrades.Count / 2;
+		for (int i = len*(stage-1); i < Mathf.Min(len*stage, character.upgrades.Count); i++)
+		{
+			AddEquipment(character.upgrades[i]);
+		}
 		CalculateStats();
 		health = constitution;
 	}

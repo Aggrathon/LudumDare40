@@ -72,7 +72,8 @@ public class BattleManager : MonoBehaviour {
 
     IEnumerator BattleOver(CharacterWrapper looser)
 	{
-		int mr = GameState.State.tournament.currentStageNum * GameState.State.tournament.currentStageNum * 100;
+		int mr = GameState.State.tournament.currentStageNum * (GameState.State.tournament.currentStageNum +1) * 50;
+		int ar = reward;
 		yield return new WaitForSeconds(0.1f);
 		CloseBattleUI();
 		GameState.State.DefeatCharacter(looser);
@@ -83,7 +84,7 @@ public class BattleManager : MonoBehaviour {
 		}
 		else
 		{
-			RewardPopup.Show(looser, reward, mr);
+			RewardPopup.Show(looser, ar, mr);
 		}
     }
 
@@ -204,7 +205,7 @@ public class BattleManager : MonoBehaviour {
             player.NextTurn();
             enemy.NextTurn();
             RefreshStatus();
-			reward++;
+			reward += 3;
         }
     }
 

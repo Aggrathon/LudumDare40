@@ -26,3 +26,8 @@ MonoBehaviour:
   agilityUpgrade: 4
   constitutionUpgrade: 2
   intelligenceUpgrade: 1
+  upgrades:
+  - {fileID: 11400000, guid: a81b37608ebd7954087773b1bd2ac287, type: 2}
+  - {fileID: 11400000, guid: dde79941d8fb2984e9228c02121126a9, type: 2}
+  - {fileID: 11400000, guid: 2a62193cca73a2a49bcc59b765c8bc02, type: 2}
+  - {fileID: 11400000, guid: 238e1792a735ac043b390cbb9db39904, type: 2}

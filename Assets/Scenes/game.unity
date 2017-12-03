@@ -5008,8 +5008,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5c6c2d5c6ad98d246aa3b1f06aca0a8b, type: 2}
   expensiveLoot:
   - {fileID: 11400000, guid: b3ddddc02ac482e4ba8af028390c93f3, type: 2}
-  - {fileID: 11400000, guid: 9045b89c5662daf45aa260ccf57e357a, type: 2}
   - {fileID: 11400000, guid: dde79941d8fb2984e9228c02121126a9, type: 2}
+  - {fileID: 11400000, guid: 2a62193cca73a2a49bcc59b765c8bc02, type: 2}
+  - {fileID: 11400000, guid: 238e1792a735ac043b390cbb9db39904, type: 2}
+  - {fileID: 11400000, guid: a81b37608ebd7954087773b1bd2ac287, type: 2}
   description: {fileID: 1221113920}
 --- !u!114 &951755688
 MonoBehaviour:

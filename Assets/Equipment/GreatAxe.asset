@@ -9,22 +9,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 97d8b50e4eca3cd4197acedff62b4bd4, type: 3}
-  m_Name: Hatchet
+  m_Name: GreatAxe
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 3a4990fbc8b5edb49b209d1ff9554f67, type: 3}
-  slot: 2
+  icon: {fileID: 21300000, guid: 1f3be205fb015ad488f85187a6dac61a, type: 3}
+  slot: 3
   type: 0
   actions:
   - cooldown: 0
     name: Prepare
     action: 0
     amount: 0
-  - cooldown: 0
+  - cooldown: 1
     name: Attack
     action: 2
-    amount: 0.8
-  durability: 5
-  strength: 1
+    amount: 3
+  durability: 10
+  strength: 2
   agility: 1
   constitution: 0
-  intelligence: 0
+  intelligence: -1
