@@ -94,6 +94,7 @@ public class CharacterWrapper
         constitution += e.equipment.constitution;
         intelligence += e.equipment.intelligence;
         health = Mathf.Min(health, constitution);
+		bool hasRemoved = false;
         if (e.equipment.slot == Equipment.Slots.oneHand)
         {
             EquipmentWrapper old = null;
@@ -102,6 +103,7 @@ public class CharacterWrapper
                 if (equipment[i].equipment.slot == Equipment.Slots.bothHands)
                 {
                     RemoveEquipment(equipment[i], e);
+					hasRemoved = true;
                     break;
                 }
                 else if (equipment[i].equipment.slot == Equipment.Slots.oneHand)
@@ -111,28 +113,31 @@ public class CharacterWrapper
                     else
                     {
                         RemoveEquipment(old, e);
-                        break;
+						hasRemoved = true;
+						break;
                     }
                 }
             }
         }
         else if (e.equipment.slot == Equipment.Slots.bothHands)
         {
-            bool second = false;
             for (int i = 0; i < equipment.Count - 1; i++)
             {
                 if (equipment[i].equipment.slot == Equipment.Slots.bothHands || equipment[i].equipment.slot == Equipment.Slots.oneHand)
                 {
-                    if (second)
-                    {
-                        RemoveEquipment(equipment[i]);
-                        AddInventory(equipment[i]);
+                    if (hasRemoved)
+					{
+						if (this == GameState.State.player)
+							AddInventory(equipment[i]);
+						RemoveEquipment(equipment[i]);
+						i--;
                     }
                     else
                     {
-                        second = true;
                         RemoveEquipment(equipment[i], e);
-                    }
+						i--;
+						hasRemoved = true;
+					}
                 }
             }
         }
@@ -143,10 +148,13 @@ public class CharacterWrapper
                 if (equipment[i].equipment.slot == e.equipment.slot)
                 {
                     RemoveEquipment(equipment[i], e);
-                    break;
+					hasRemoved = true;
+					break;
                 }
             }
         }
+		if (!hasRemoved && this == GameState.State.player)
+			GameState.State.battleManager.EquipEquipment(e);
     }
 
     public void RemoveEquipment(EquipmentWrapper e, EquipmentWrapper equip=null)
