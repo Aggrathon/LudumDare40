@@ -19,8 +19,8 @@ public class BuildPipelineScript : EditorWindow
 		name = name.Replace(" ", "_");
 		name = name.Replace("'", "");
 		BuildPlatform(path, name, BuildTarget.StandaloneWindows64);
-		BuildPlatform(path, name, BuildTarget.StandaloneLinuxUniversal);
-		BuildPlatform(path, name, BuildTarget.StandaloneOSXUniversal);
+		BuildPlatform(path, name, BuildTarget.StandaloneLinux64);
+		BuildPlatform(path, name, BuildTarget.StandaloneOSXIntel64);
 		BuildPlatform(path, name, BuildTarget.WebGL);
 		Process.Start(path);
 	}
