@@ -61,6 +61,7 @@ public class Lootbox : MonoBehaviour {
 		instance.content = list;
 		instance.num = num;
 		instance.Refresh();
+		AudioPlayer.PlayPling();
 	}
 
 	public static void OpenCheapSmall()
@@ -74,6 +75,7 @@ public class Lootbox : MonoBehaviour {
 			instance.content.Add(e);
 		}
 		instance.Refresh();
+		AudioPlayer.PlayPling();
 	}
 
 	public static void OpenCheapLarge()
@@ -87,6 +89,7 @@ public class Lootbox : MonoBehaviour {
 			instance.content.Add(e);
 		}
 		instance.Refresh();
+		AudioPlayer.PlayPling();
 	}
 
 	public static void OpenExpensiveSmall()
@@ -100,6 +103,7 @@ public class Lootbox : MonoBehaviour {
 			instance.content.Add(e);
 		}
 		instance.Refresh();
+		AudioPlayer.PlayPling();
 	}
 
 	public static void OpenExpensiveLarge()
@@ -113,6 +117,7 @@ public class Lootbox : MonoBehaviour {
 			instance.content.Add(e);
 		}
 		instance.Refresh();
+		AudioPlayer.PlayPling();
 	}
 	
 }

@@ -21,6 +21,7 @@ public class RewardPopup : MonoBehaviour {
 
 	public static void Show(CharacterWrapper looser, int audRew, int matRew)
 	{
+		AudioPlayer.PlayTrumpet();
 		instance.audienceReward.text = "" + audRew;
 		instance.matchReward.text = "" + matRew;
 		instance.total.text = "Total: " + (audRew + matRew) + " Denarius";

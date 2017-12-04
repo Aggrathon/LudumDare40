@@ -70,6 +70,7 @@ public class BattleManager : MonoBehaviour {
         yield return new WaitForSeconds(0.1f);
         RefreshStatus(true);
         FlashText.Flash("Fight!", Color.red);
+		AudioPlayer.PlayFight();
         yield return new WaitForSeconds(0.1f);
         battleUI.SetActive(true);
 		GameState.State.tournament.gameObject.SetActive(false);
