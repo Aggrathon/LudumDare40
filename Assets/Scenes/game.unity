@@ -4677,6 +4677,9 @@ MonoBehaviour:
   trumpet: {fileID: 8300000, guid: 3a58fb5f42ce71f498c1edcf632e95c5, type: 3}
   fight: {fileID: 8300000, guid: 5ed69c84178c0d94b81cf5a3447c877d, type: 3}
   pling: {fileID: 8300000, guid: 2562dda99927a07409c7bebc7a32a426, type: 3}
+  ching: {fileID: 8300000, guid: b7ab2a850cfceff4fbf567fc92fe82e5, type: 3}
+  huh: {fileID: 8300000, guid: 38e0c5a773f52874ba3f9adc28bfed6f, type: 3}
+  hoah: {fileID: 8300000, guid: 0bb03033afd0fce418efd25066ae658c, type: 3}
 --- !u!4 &492982884
 Transform:
   m_ObjectHideFlags: 0

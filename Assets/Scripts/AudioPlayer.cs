@@ -12,6 +12,9 @@ public class AudioPlayer : MonoBehaviour {
 	public AudioClip trumpet;
 	public AudioClip fight;
 	public AudioClip pling;
+	public AudioClip ching;
+	public AudioClip huh;
+	public AudioClip hoah;
 
 	private void Awake()
 	{
@@ -31,5 +34,20 @@ public class AudioPlayer : MonoBehaviour {
 	public static void PlayPling()
 	{
 		instance.fx.PlayOneShot(instance.pling);
+	}
+
+	public static void PlayChing()
+	{
+		instance.fx.PlayOneShot(instance.ching);
+	}
+
+	public static void PlayHuh()
+	{
+		instance.fx.PlayOneShot(instance.huh);
+	}
+
+	public static void PlayHoah()
+	{
+		instance.fx.PlayOneShot(instance.hoah);
 	}
 }

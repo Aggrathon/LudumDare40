@@ -24,16 +24,19 @@ public class CombatAnimation : MonoBehaviour {
 	{
 		cheer.Play();
 		anim.SetTrigger(utility);
+		StartCoroutine(DelaydHoah());
 	}
 
 	public void PlayBlock()
 	{
 		anim.SetTrigger(block);
+		StartCoroutine(DelaydHuh());
 	}
 
 	public void PlayAttack()
 	{
 		anim.SetTrigger(attack);
+		StartCoroutine(DelaydChing());
 	}
 
 	public void PlayDamage()
@@ -44,5 +47,22 @@ public class CombatAnimation : MonoBehaviour {
 	public void SetLook(Sprite s)
 	{
 		sprite.sprite = s;
+	}
+
+	IEnumerator DelaydChing()
+	{
+		yield return new WaitForSeconds(0.25f);
+		AudioPlayer.PlayChing();
+	}
+
+	IEnumerator DelaydHoah()
+	{
+		yield return new WaitForSeconds(0.1f);
+		AudioPlayer.PlayHoah();
+	}
+	IEnumerator DelaydHuh()
+	{
+		yield return new WaitForSeconds(0.05f);
+		AudioPlayer.PlayHuh();
 	}
 }

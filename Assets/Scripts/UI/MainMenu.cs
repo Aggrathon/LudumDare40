@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -18,7 +16,7 @@ public class MainMenu : MonoBehaviour {
             colorButtons[i].onClick.RemoveAllListeners();
             colorButtons[i].onClick.AddListener(() => { SetColor(j); });
         }
-        colorButtons[0].interactable = false;
+        colorButtons[2].interactable = false;
 		tutorial.isOn = GameState.tutorial;
 	}
 
