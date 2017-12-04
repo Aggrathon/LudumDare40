@@ -179,7 +179,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Beta 2
+  m_Text: Beta 3
 --- !u!222 &8819727
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1474,7 +1474,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Game Name Here
+  m_Text: Gladitorial Moneta Victoria
 --- !u!222 &962166637
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1733,25 +1733,22 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 2
     m_MaxSize: 40
-    m_Alignment: 4
+    m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Text Here explaining the bakctory
+  m_Text: 'Our hero seeks a way out of the slums. He isn''t afraid of danger, so he
+    signs up to be a gladiator.
 
-    Bla
 
-    Bla
+    Besides curage a gladiator also needs some reliable equipment. That costs a lot
+    of money, money our hero doesn''t have.
 
-    Motivation: Arena Champion
 
-    Obstacle: Poor => Scrap Equipment
-
-    Solution: Bring Spares
-
-    Problem: Hard to fight with a Bag'
+    Fortunately there is lots perfectly good equipment thrown away daily that the
+    hero could use (but remember to bring extras just in case).'
 --- !u!222 &1013895743
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2642,7 +2639,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Read the Tutorials Before Proceeding
+  m_Text: Remember to read the tutorials!
 --- !u!222 &1706656227
 CanvasRenderer:
   m_ObjectHideFlags: 0

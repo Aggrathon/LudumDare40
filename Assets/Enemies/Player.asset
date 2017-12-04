@@ -14,7 +14,7 @@ MonoBehaviour:
   look: {fileID: 21300000, guid: 723014a073a969c41adff0c3181e881e, type: 3}
   strength: 12
   agility: 14
-  constitution: 16
+  constitution: 18
   intelligence: 8
   baseWeapon: {fileID: 0}
   equipment:
