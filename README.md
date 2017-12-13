@@ -1,5 +1,3 @@
-# LudumDare40
- My entry to the 40th Ludum Dare game jam
 # Gladitorial Moneta Victoria - Ludum Dare 40
 ![Screenshot](https://github.com/Aggrathon/LudumDare40/raw/gh-pages/screenshot_wide.png)
 
